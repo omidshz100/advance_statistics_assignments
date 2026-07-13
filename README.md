@@ -53,11 +53,20 @@ The assignments cover:
    *Note: For RL visualization and PyTorch models, ensure you have the appropriate system packages (e.g., `swig`, `gymnasium[box2d]`) installed as outlined in the notebooks.*
 
 ## 💻 Usage
+
+### Running Locally
 Navigate to the respective module directory and launch Jupyter Notebook or JupyterLab to explore the implementations:
 ```bash
 jupyter notebook
 ```
 Open any `.ipynb` file to run the cells, view the training progress, statistical model summaries, and output visualisations/videos.
+
+### Running in Google Colab
+If you prefer to run the notebooks in Google Colab, you can click the **Open In Colab** badges provided in the Repository Structure section above.
+For the Reinforcement Learning (Module A) notebooks, you may need to install additional dependencies in Colab. Simply add a new code cell at the top of the notebook and run the following command before executing the rest of the code:
+```python
+!pip install gymnasium[box2d] stable-baselines3 swig moviepy imageio-ffmpeg
+```
 
 ## 👤 Author
 **Omid Shojaeian Zanjani**

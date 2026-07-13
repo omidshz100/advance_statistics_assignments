@@ -8,11 +8,11 @@ Welcome to the repository for the **Advanced Statistical Learning and Modeling**
 This module focuses on implementing classic and deep reinforcement learning algorithms from scratch using Python, PyTorch, and Gymnasium. The environments explored include **FrozenLake** and **LunarLander**.
 
 The lab sessions and assignments cover:
-- **Tabular Methods:**
+- **Assignment 1:**
   - `Q-Learning` (FrozenLake) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment1/01%20LAB_A%20Q_Learning.ipynb)
-  - `SARSA` (FrozenLake) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment1/03%20LAB_A%20SARSA.ipynb)
-- **Deep Reinforcement Learning:**
   - `Deep Q-Networks (DQN)` (LunarLander) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment1/02%20LAB_A%20DQN.ipynb)
+  - `SARSA` (FrozenLake) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment1/03%20LAB_A%20SARSA.ipynb)
+- **Assignment 2:**
   - `REINFORCE` (Policy Gradient) (LunarLander) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment2/04%20LAB_A%20Reinforce.ipynb)
   - `Actor-Critic` methods (LunarLander) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment2/05%20LAB_%20A_Actor%20Critic.ipynb)
   - `Proximal Policy Optimization (PPO)` (LunarLander) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment2/06%20LAB_A%20PPO.ipynb)

@@ -1,0 +1,122 @@
+### EXERCISE 1 ###
+  school sex  age address famsize Pstatus  ...  Walc  health absences  G1  G2  G3
+0     GP   F   18       U     GT3       A  ...     1       3        6   5   6   6
+1     GP   F   17       U     GT3       T  ...     1       3        4   5   5   6
+2     GP   F   15       U     LE3       T  ...     3       3       10   7   8  10
+3     GP   F   15       U     GT3       T  ...     1       5        2  15  14  15
+4     GP   F   16       U     GT3       T  ...     2       5        4   6  10  10
+
+[5 rows x 33 columns]
+Multinomial Result:
+                          MNLogit Regression Results                          
+==============================================================================
+Dep. Variable:                      y   No. Observations:                  395
+Model:                        MNLogit   Df Residuals:                      383
+Method:                           MLE   Df Model:                           10
+Date:                Mon, 13 Jul 2026   Pseudo R-squ.:                 0.08907
+Time:                        10:32:15   Log-Likelihood:                -370.05
+converged:                       True   LL-Null:                       -406.24
+Covariance Type:            nonrobust   LLR p-value:                 1.545e-11
+==============================================================================
+       y=1       coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.7476      0.477      1.568      0.117      -0.187       1.682
+studytime      0.0084      0.147      0.057      0.955      -0.279       0.296
+failures      -0.8134      0.176     -4.634      0.000      -1.157      -0.469
+absences      -0.0103      0.014     -0.753      0.451      -0.037       0.017
+Medu          -0.0341      0.142     -0.240      0.810      -0.313       0.244
+Fedu           0.0421      0.142      0.296      0.767      -0.237       0.321
+------------------------------------------------------------------------------
+       y=2       coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -1.3123      0.683     -1.920      0.055      -2.652       0.027
+studytime      0.0909      0.187      0.486      0.627      -0.276       0.458
+failures      -1.7377      0.549     -3.163      0.002      -2.814      -0.661
+absences      -0.0734      0.030     -2.441      0.015      -0.132      -0.014
+Medu           0.5411      0.198      2.736      0.006       0.153       0.929
+Fedu          -0.1117      0.187     -0.596      0.551      -0.479       0.256
+==============================================================================
+Ordinal Result:
+                             OrderedModel Results                             
+==============================================================================
+Dep. Variable:                      y   Log-Likelihood:                -375.65
+Model:                   OrderedModel   AIC:                             765.3
+Method:            Maximum Likelihood   BIC:                             793.2
+Date:                Mon, 13 Jul 2026                                         
+Time:                        10:32:15                                         
+No. Observations:                 395                                         
+Df Residuals:                     388                                         
+Df Model:                           5                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+studytime      0.0724      0.120      0.605      0.545      -0.162       0.307
+failures      -0.9290      0.171     -5.431      0.000      -1.264      -0.594
+absences      -0.0299      0.013     -2.301      0.021      -0.055      -0.004
+Medu           0.2672      0.119      2.252      0.024       0.035       0.500
+Fedu          -0.0596      0.118     -0.507      0.612      -0.290       0.171
+0/1           -0.5317      0.400     -1.330      0.183      -1.315       0.252
+1/2            0.8885      0.063     14.021      0.000       0.764       1.013
+==============================================================================
+MNLogit AIC: 764.1092564569092
+Ordinal AIC: 765.3086855858418
+LR Test for Proportional Odds: stat=11.20, df=5.0, p-value=0.0476
+
+### EXERCISE 2 ###
+Contingency Table:
+Edu_cat     sex                race  Advanced  College  HighSchool
+0        Female  Amer-Indian-Eskimo        13       55          51
+1        Female  Asian-Pac-Islander       123       98         125
+2        Female               Black       212      525         818
+3        Female               Other        18       31          60
+4        Female               White      1967     3018        3657
+5          Male  Amer-Indian-Eskimo        18       51         123
+6          Male  Asian-Pac-Islander       323      177         193
+7          Male               Black       230      440         899
+8          Male               Other        28       34         100
+9          Male               White      5135     5311        8728
+      sex                race     Edu_cat  count
+0  Female  Amer-Indian-Eskimo    Advanced     13
+1  Female  Amer-Indian-Eskimo     College     55
+2  Female  Amer-Indian-Eskimo  HighSchool     51
+3  Female  Asian-Pac-Islander    Advanced    123
+4  Female  Asian-Pac-Islander     College     98
+Log-Linear Indep Deviance: 1104.6831441193372
+Log-Linear Cond Deviance: 436.6123241839718
+Log-Linear TwoWay Deviance: 19.297301728027577
+Logistic Regression Result:
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                sex_bin   No. Observations:                32561
+Model:                          Logit   Df Residuals:                    32554
+Method:                           MLE   Df Model:                            6
+Date:                Mon, 13 Jul 2026   Pseudo R-squ.:                 0.01467
+Time:                        10:32:15   Log-Likelihood:                -20365.
+converged:                       True   LL-Null:                       -20668.
+Covariance Type:            nonrobust   LLR p-value:                1.075e-127
+==============================================================================================
+                                 coef    std err          z      P>|z|      [0.025      0.975]
+----------------------------------------------------------------------------------------------
+Intercept                      0.6642      0.120      5.546      0.000       0.430       0.899
+race[T.Asian-Pac-Islander]     0.1651      0.135      1.227      0.220      -0.099       0.429
+race[T.Black]                 -0.4854      0.122     -3.966      0.000      -0.725      -0.246
+race[T.Other]                 -0.1194      0.171     -0.700      0.484      -0.454       0.215
+race[T.White]                  0.2941      0.118      2.497      0.013       0.063       0.525
+Edu_cat[T.College]            -0.3892      0.032    -11.982      0.000      -0.453      -0.326
+Edu_cat[T.HighSchool]         -0.0906      0.031     -2.958      0.003      -0.151      -0.031
+==============================================================================================
+Two-Way Log-Linear Interaction Params related to Sex:
+sex[T.Male]                               0.664247
+sex[T.Male]:race[T.Asian-Pac-Islander]    0.165147
+sex[T.Male]:race[T.Black]                -0.485393
+sex[T.Male]:race[T.Other]                -0.119436
+sex[T.Male]:race[T.White]                 0.294052
+sex[T.Male]:Edu_cat[T.College]           -0.389207
+sex[T.Male]:Edu_cat[T.HighSchool]        -0.090617
+dtype: float64
+
+### EXERCISE 3 ###
+Mean Y: 6.924324324324324 Var Y: 177.71551036828438
+Zero counts: 44
+Poisson AIC: 10133.249064448868
+NB AIC: 4423.9851871662595

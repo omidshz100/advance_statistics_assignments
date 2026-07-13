@@ -9,13 +9,13 @@ This module focuses on implementing classic and deep reinforcement learning algo
 
 The lab sessions and assignments cover:
 - **Tabular Methods:**
-  - `Q-Learning` (FrozenLake)
-  - `SARSA` (FrozenLake)
+  - `Q-Learning` (FrozenLake) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment1/01%20LAB_A%20Q_Learning.ipynb)
+  - `SARSA` (FrozenLake) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment1/03%20LAB_A%20SARSA.ipynb)
 - **Deep Reinforcement Learning:**
-  - `Deep Q-Networks (DQN)` (LunarLander)
-  - `REINFORCE` (Policy Gradient) (LunarLander)
-  - `Actor-Critic` methods (LunarLander)
-  - `Proximal Policy Optimization (PPO)` (LunarLander)
+  - `Deep Q-Networks (DQN)` (LunarLander) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment1/02%20LAB_A%20DQN.ipynb)
+  - `REINFORCE` (Policy Gradient) (LunarLander) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment2/04%20LAB_A%20Reinforce.ipynb)
+  - `Actor-Critic` methods (LunarLander) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment2/05%20LAB_%20A_Actor%20Critic.ipynb)
+  - `Proximal Policy Optimization (PPO)` (LunarLander) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment2/06%20LAB_A%20PPO.ipynb)
 
 *(Located in `moduleA/Assignment1` and `moduleA/Assignment2`)*
 
@@ -23,11 +23,10 @@ The lab sessions and assignments cover:
 This module focuses on Generalized Linear Models (GLMs) and advanced statistical techniques to analyze real-world datasets (e.g., student performance, census data, and absenteeism at work) using `pandas` and `statsmodels`.
 
 The assignments cover:
-- **Categorical Data Analysis:** 
+- **Assignment 1:** Categorical Data Analysis & Log-Linear Models [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleB/Assignment1/assignment1.ipynb)
   - Multinomial and Ordinal Logistic Regression (Proportional Odds Model).
-- **Log-Linear Models:** 
   - Analyzing multi-way contingency tables and their equivalence to Logistic Regression.
-- **Count Data Modeling:** 
+- **Assignment 2:** Count Data Modeling [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleB/Assignment2/project/assignment2.ipynb)
   - Poisson and Negative Binomial Regression.
   - Handling overdispersion and zero-inflation using Zero-Inflated Poisson (ZIP) and Zero-Inflated Negative Binomial (ZINB) models.
 

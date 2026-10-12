@@ -1,6 +1,6 @@
 # Module A — Reinforcement Learning (reviewed 12 October 2026)
 
-This folder contains seven teaching notebooks, not a consolidated benchmark or a claim that all agents solve their environments. **The original assignment prompts are embedded in the notebooks.** A separate official rubric/instructions document for Module A was not present in the repository during this review.
+This folder contains seven teaching notebooks, not a consolidated benchmark or a claim that all agents solve their environments. **The original assignment prompts are embedded in the notebooks.** The user subsequently supplied official Module A Assignment 1 and Assignment 2 PDFs, reconciled against all notebooks; see [task-level checklist](ASSIGNMENT_CHECKLIST.md).
 
 ## Assignment 1
 
@@ -34,15 +34,17 @@ jupyter lab
 
 From Jupyter, open each notebook and select **Run All**. DQN, REINFORCE and Actor-Critic perform hundreds/thousands of training episodes; training can take substantial time. LunarLander-v3 requires Box2D and may need a working SWIG/toolchain depending on platform. Video capture additionally needs available ffmpeg/MoviePy dependencies.
 
-**Validation boundary:** Changes were reviewed at source level, but full Gymnasium/Box2D training and policy evaluation were **not re-executed** in the assistant's current runtime; the necessary Gymnasium, Box2D and Stable-Baselines3 packages were not available there. Saved outputs from the *old implementations* are preserved in the Git history, but not presented as results for the revised algorithms. Syntax checks do not establish learned performance or runtime compatibility.
+**Updated validation (12 October 2026):** All seven notebooks were fully re-executed by GitHub Actions; original training figures and numerical outputs were recorded in the main branch. Successful execution does not imply that every agent solved its task: bonus CartPole DQN did not reach 475/100 and Actor-Critic's score is a last-100 training mean, not a held-out evaluation.
+
+**Supplementary academic documents:** See [Module A English and Persian reports](reports/README.md). They use actual recorded plots and measured results.
 
 ## Scientific interpretation and remaining work
 
 - Train with fixed seeds (ideally multiple seeds), log learning curves and run greedy policy evaluations on fresh environment episodes.
 - Report evaluation episode count, mean and standard deviation separately from training rewards, including negative outcomes.
 - The modified LunarLander REINFORCE uses **LunarLander-v3** rather than legacy **LunarLander-v2**, so legacy scores are not directly comparable without rerunning.
-- The modified Actor-Critic now uses one-step TD updates rather than its previous episodic Monte Carlo advantage. Training curves must be rerun.
+- The modified Actor-Critic now uses one-step TD updates rather than its previous episodic Monte Carlo advantage. The corrected training curves have been regenerated.
 - For PPO, report the fresh evaluation produced by the final cell rather than inferring policy performance solely from the Monitor log.
-- Verify the seven notebooks against the official Module A grading instructions if they exist outside this repository.
+- The supplied official assignment instructions have been reconciled with these notebooks.
 
 This review intentionally does not alter the original video files or the Module B coursework.

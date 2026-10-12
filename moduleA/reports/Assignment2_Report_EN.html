@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><title>Assignment 2 — Module A</title></head><body><main class="report"><h1>Assignment 2 — Policy Gradient, Actor–Critic and PPO</h1>
+<p><strong>Advanced Statistical Learning and Modeling · Module A</strong><br />
+<strong>Student:</strong> Omid Shojaeian<br />
+<strong>Report based on:</strong> the three executed Assignment 2 notebooks on GitHub, 12 October 2026.<br />
+<strong>Source:</strong> official <em>Assignment 2</em>, November 2025, pp. 1–3.</p>
+<h2>Abstract and recorded outcomes</h2>
+<p>This assignment studies three reinforcement-learning approaches: Monte Carlo REINFORCE, one-step temporal-difference Actor–Critic and Proximal Policy Optimization (PPO). It evaluates a variance-reduction baseline, the distinct roles of the actor and critic, and the effect of two actually trained PPO hyperparameter alternatives. Numerical results below are taken from the last saved notebook execution.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Environment</th>
+<th>Measured outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REINFORCE, without baseline</td>
+<td>LunarLander-v3</td>
+<td>Last-100 training mean 74.54</td>
+</tr>
+<tr>
+<td>REINFORCE, earlier-episodes running baseline</td>
+<td>LunarLander-v3</td>
+<td>Last-100 training mean 91.41</td>
+</tr>
+<tr>
+<td>One-step TD Actor–Critic</td>
+<td>CartPole-v1</td>
+<td>Last-100 training mean 478.67 at episode 800</td>
+</tr>
+<tr>
+<td>PPO, standard setting</td>
+<td>CartPole-v1</td>
+<td>Independent evaluation mean 500.00 (30 episodes)</td>
+</tr>
+<tr>
+<td>PPO, higher learning rate</td>
+<td>CartPole-v1</td>
+<td>Independent evaluation mean 500.00 (30 episodes)</td>
+</tr>
+<tr>
+<td>PPO, larger minibatch</td>
+<td>CartPole-v1</td>
+<td>Independent evaluation mean 355.93 (30 episodes)</td>
+</tr>
+</tbody>
+</table>
+<h2>1. REINFORCE on LunarLander</h2>
+<h3>T1. Policy network, return and training loop</h3>
+<p>The REINFORCE notebook builds a stochastic categorical policy over four actions from an eight-dimensional observation. Its MLP is <strong>8 → 128 (ReLU) → 4 (softmax)</strong>. The algorithm samples trajectories and updates parameters after complete episodes using policy-gradient weights derived from observed discounted returns.</p>
+<table>
+<thead>
+<tr>
+<th>Hyperparameter</th>
+<th>Implemented setting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Learning rate</td>
+<td>0.001 (Adam)</td>
+</tr>
+<tr>
+<td>Episodes</td>
+<td>2,000 for each configuration</td>
+</tr>
+<tr>
+<td>Discount γ</td>
+<td>0.99</td>
+</tr>
+<tr>
+<td>Maximum steps</td>
+<td>1,000 per episode</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>One complete episode</td>
+</tr>
+<tr>
+<td>Policy architecture</td>
+<td>8 inputs → 128 hidden → 4 action probabilities</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Environment-version disclosure:</strong> The official instructions specify <strong>LunarLander-v2</strong>. The saved execution actually used <strong>LunarLander-v3</strong>, because the installed Gymnasium deprecated v2. This compatibility fallback is printed in the notebook. The report describes the actual v3 measurements rather than labeling them v2 results.</p>
+<h3>T2. Why Monte Carlo? What does the baseline do?</h3>
+<p>REINFORCE uses realized discounted returns from full episodes and does <strong>not bootstrap from estimated state values</strong>. A common expression for its update is</p>
+<p><strong>∇J(θ) ≈ Σₜ ∇θ log πθ(aₜ|sₜ) [Gₜ − bₜ].</strong></p>
+<p>Trajectory returns fluctuate greatly, giving high-variance gradient estimates. A baseline can reduce their variance without changing the expected policy-gradient direction when it is independent of the sampled action. Here the baseline is a <strong>running mean of prior episodes' discounted returns</strong>, updated only <strong>after</strong> the current episode's optimizer step; the no-baseline experiment uses unadjusted returns. It is not a learned critic and is not identical to the previously used within-episode return standardization.</p>
+<h3>T3. Learning curves and observed comparison</h3>
+<p><img alt="REINFORCE smoothed reward curves" src="figures/reinforce_smoothed_curve.png" /></p>
+<p><img alt="REINFORCE per-episode raw returns" src="figures/reinforce_raw_curve.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Recorded measurement</th>
+<th style="text-align: right;">Without baseline</th>
+<th style="text-align: right;">With baseline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Last-100 mean training reward</td>
+<td style="text-align: right;">74.54</td>
+<td style="text-align: right;">91.41</td>
+</tr>
+<tr>
+<td>Absolute difference (with minus without)</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">16.87</td>
+</tr>
+</tbody>
+</table>
+<p>The running-baseline configuration had a <strong>higher observed final 100-episode training mean</strong> in the recorded experiments. However, the two trainings are separate stochastic trajectories, and this result <strong>does not prove</strong> a statistically significant causal improvement or optimal control. Training means should not be called held-out evaluation scores.</p>
+<h2>2. One-step TD Actor–Critic on CartPole-v1</h2>
+<h3>T1. Architecture and online update</h3>
+<p>The shared network takes four CartPole features into a <strong>128-unit ReLU layer</strong>, then branches into an <strong>actor</strong> head producing two action probabilities and a <strong>critic</strong> head predicting one scalar state value. Its training uses Adam at learning rate <strong>0.002</strong>, γ = <strong>0.99</strong>, with up to <strong>1,000 episodes</strong> and CartPole's 500-step episode cap.</p>
+<p>The real one-step temporal-difference target is</p>
+<p><strong>yₜ = rₜ + γ V(sₜ₊₁)</strong> for nonterminal transitions, or <strong>yₜ = rₜ</strong> for terminated transitions.</p>
+<p>The TD error is <strong>δₜ = yₜ − V(sₜ)</strong>. The actor maximizes the sampled action's log probability weighted by detached δₜ, while the critic minimizes <strong>[yₜ − V(sₜ)]²</strong>. The implementation retains a bootstrap value for a time-limit truncation, unlike a genuine task termination.</p>
+<h3>T2. Contrast with REINFORCE</h3>
+<p>REINFORCE waits until the end of an episode and uses Monte Carlo discounted returns; this Actor–Critic implementation performs an online update <strong>at every transition</strong>, with the critic estimating the next-state value. Bootstrapping changes bias/variance and learning dynamics. Calling a full-episode Monte Carlo return-minus-value estimate a “one-step TD error” would be incorrect; the updated code explicitly computes the one-step target.</p>
+<h3>T3. Actual learning curve</h3>
+<p><img alt="CartPole Actor-Critic episode rewards" src="figures/actor_critic_curve.png" /></p>
+<p>The last 100 training episodes reached an observed mean of <strong>478.67</strong> at episode <strong>800</strong>, when the notebook stopped after its pre-specified 475 last-100 training threshold. This is evidence of good <strong>training-phase</strong> performance. It is <strong>not</strong> a separately computed 100-episode held-out greedy evaluation and should not be reported as such. Performance can be sensitive to random seed and learning-rate setting.</p>
+<h2>3. PPO on CartPole-v1</h2>
+<h3>T1. Policy and hyperparameters</h3>
+<p>PPO was implemented through <strong>Stable-Baselines3</strong>, using the `MlpPolicy` default actor/critic MLP (two hidden layers of 64 units), learning rate <strong>0.0003</strong>, discount γ <strong>0.99</strong>, update rollout <strong>n_steps = 2,048</strong>, minibatch <strong>64</strong>, and requested `total_timesteps = 25,000`. With 2,048-step rollouts, the saved training log ended at <strong>26,624 interaction steps</strong> (the last full rollout extends beyond the requested minimum).</p>
+<h3>T2. Ratio, clipping and entropy</h3>
+<p>PPO is <strong>on-policy</strong>: data used for each update must come from the policy collecting those rollouts rather than from an unrestricted replay buffer of old policies.</p>
+<p>The likelihood ratio <strong>rₜ(θ) = πθ(aₜ|sₜ) / πold(aₜ|sₜ)</strong> measures how the action probability changes under the candidate policy. PPO's clipped surrogate uses <strong>min[rₜ Aₜ, clip(rₜ,1−ε,1+ε) Aₜ]</strong> to limit gains from overly large policy changes. An optional entropy bonus rewards policy uncertainty and can support exploration; the notebook relies on the SB3 implementation rather than reimplementing these components manually.</p>
+<h3>T3. Learning curves and two tested alternatives</h3>
+<p><img alt="PPO baseline training curve" src="figures/ppo_learning_curve.png" /></p>
+<p><img alt="PPO three-configuration learning comparison" src="figures/ppo_alternatives_curve.png" /></p>
+<p>Each configuration was <strong>actually trained</strong>, not hypothesized, and evaluated greedily on 30 new episodes with the same evaluation seeds.</p>
+<table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th style="text-align: right;">Learning rate</th>
+<th style="text-align: right;">Batch size</th>
+<th style="text-align: right;">Greedy mean</th>
+<th style="text-align: right;">SD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Baseline</td>
+<td style="text-align: right;">0.0003</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">500.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>Higher learning rate</td>
+<td style="text-align: right;">0.0010</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">500.00</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr>
+<td>Larger batch</td>
+<td style="text-align: right;">0.0003</td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">355.93</td>
+<td style="text-align: right;">100.24</td>
+</tr>
+</tbody>
+</table>
+<p>Both the baseline and the tested higher-learning-rate variant achieved mean <strong>500</strong> on the 30 evaluation episodes of the recorded run. The larger-batch variant scored <strong>355.93</strong>, with nonzero variability. These are empirical comparisons at one training seed and a capped-reward task; they <strong>do not show universal superiority</strong> of a particular learning-rate or batch-size choice.</p>
+<h2>4. Comparative interpretation and limitations</h2>
+<p>The three methods differ fundamentally in how they estimate improvement signals: REINFORCE weights log-probability gradients by completed-episode returns; Actor–Critic adds a learned value function and one-step TD bootstrap; PPO constrains policy changes by a probability ratio and clipping.</p>
+<p>The experiment demonstrates feasible training and meaningful empirical differences, but not multi-seed statistical generalization. The REINFORCE and Actor–Critic figures show <strong>training returns</strong>, while the PPO table reports <strong>fresh held-out deterministic evaluations</strong>. Only within those definitions should performance be compared. The official instructor requires the annotated executed notebooks; this report is a supporting explanatory document.</p>
+<h2>Reproducibility and sources</h2>
+<ul>
+<li>Official <em>Assignment 2</em> (November 2025), pp. 1–3.</li>
+<li>Executed notebooks: `moduleA/Assignment2/04 LAB_A Reinforce.ipynb`, `05 LAB_ A_Actor Critic.ipynb`, and `06 LAB_A PPO.ipynb` from the repository's main branch.</li>
+<li>Figures were extracted directly from these notebooks' recorded `image/png` outputs.</li>
+</ul></main></body></html>

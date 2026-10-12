@@ -1,0 +1,54 @@
+name: Module A bilingual report build
+on:
+  pull_request:
+    paths:
+      - 'moduleA/reports/*.md'
+      - 'moduleA/reports/build_reports.py'
+      - '.github/workflows/module_a_reports.yml'
+jobs:
+  generate:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: \${{ github.event.pull_request.head.ref }}
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install typography and report dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-core fonts-dejavu-core poppler-utils
+          python -m pip install --upgrade pip
+          python -m pip install markdown 'weasyprint>=64,<69' Pillow
+      - name: Build four reports using original notebook results and figures
+        run: python moduleA/reports/build_reports.py
+      - name: Validate output PDFs and pages
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess
+          folder=Path("moduleA/reports")
+          reports=[folder/f"Assignment{a}_Report_{l}.pdf" for a in (1,2) for l in ("EN","FA")]
+          for p in reports:
+              meta=subprocess.check_output(["pdfinfo",str(p)],text=True)
+              print(p.name,p.stat().st_size,meta.split("Pages:")[1].splitlines()[0].strip())
+              assert p.stat().st_size>15000
+              text=subprocess.check_output(["pdftotext",str(p),"-"],text=True)
+              assert len(text)>1500,(p.name,len(text))
+          assert len(list((folder/"figures").glob("*.png")))==11
+          print("Verified four PDFs and eleven genuine source figures.")
+          PY
+      - name: Push PDFs, HTML reports, figures and measured values to review branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add moduleA/reports
+          git diff --cached --quiet && exit 0
+          git commit -m "Publish four evidence-based bilingual Module A PDF reports [skip ci]"
+          git push origin HEAD:\${{ github.event.pull_request.head.ref }}

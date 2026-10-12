@@ -1,0 +1,3 @@
+smaller,larger,LR_chi2,df,p_value
+independence,conditional_independence,668.0708199353663,10,4.471359573008564e-137
+conditional_independence,all_two_way,417.31502245594527,4,5.043182589369201e-89

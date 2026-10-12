@@ -1,0 +1,70 @@
+<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>مرور ماژول B — امتحان</title><style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#15243c;--muted:#607089;--blue:#205ca7;--line:#dce4ed;--green:#176c55}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.9 Tahoma,"Noto Sans Arabic",sans-serif}.wrap{max-width:970px;padding:28px 22px;margin:auto}header{background:#152943;color:white;padding:42px 26px;border-radius:18px;margin-bottom:22px}header h1{margin:0 0 5px;font-size:27px}header p{margin:0;color:#dce8f7}h2{font-size:21px;margin:0 0 14px}h3{font-size:17px;margin:19px 0 7px;color:#164c8b}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;margin:16px 0;box-shadow:0 2px 12px #10223d07}.meta{color:var(--muted);font-size:13px;margin-top:4px}.lead{font-size:17px}code,.latin{font-family:ui-monospace,Monaco,Consolas,monospace;direction:ltr;unicode-bidi:isolate;display:inline-block;background:#eef3f9;padding:1px 5px;border-radius:5px;font-size:.93em}pre{direction:ltr;text-align:left;overflow:auto;white-space:pre-wrap;border-radius:12px;background:#eef3f9;padding:16px;line-height:1.65;font:14px/1.6 ui-monospace,Monaco,monospace}table{width:100%;border-collapse:collapse;line-height:1.6;margin:12px 0}th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--line)}th{background:#eaf0f7;font-size:14px}td{font-size:14px}strong{font-weight:700}ul{padding-right:23px}li{margin-bottom:9px}details{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:white;padding:10px 14px}summary{cursor:pointer;font-weight:bold;color:var(--blue)}.answer{border-top:1px solid var(--line);margin-top:10px;padding-top:12px}.en{direction:ltr;unicode-bidi:isolate;text-align:left;font:14px/1.75 system-ui,Arial,sans-serif;background:#f0f4fa;border-radius:9px;padding:12px;margin-top:9px}.warning{border-right:4px solid #bf7a24;background:#fffbf3;padding:14px;border-radius:8px}.okay{border-right:4px solid var(--green);background:#eef9f3;padding:14px;border-radius:8px}.tags{display:flex;gap:7px;flex-wrap:wrap}.tag{color:var(--blue);border:1px solid #c6d8ef;border-radius:24px;padding:2px 10px;font-size:12px}.footer{font-size:13px;color:var(--muted);text-align:center;margin:32px 0 6px}@media(max-width:620px){.wrap{padding:12px}header{padding:27px 18px}.card{padding:17px}h2{font-size:19px}th,td{padding:8px 5px;font-size:12px}}
+</style></head><body><main class="wrap"><header><h1>جزوهٔ مرور سریع ماژول B</h1><p>آمادگی برای امتحان ۱۵ اکتبر ۲۰۲۶ · برگرفته از تکالیف استاد و نتایج اجرای پروژه</p></header>
+<section class="card"><h2>وضعیت دو تکلیف</h2><div class="tags"><span class="tag">Assignment 1: تحلیل مجدد و تکمیل‌شده</span><span class="tag">Assignment 2: بازاجرا و تکمیل‌شده با اکسل اصلی</span></div><p class="lead">در امتحان برای هر مسئله باید به چهار سؤال پاسخ بدهی: «چه داده‌ای؟ چه مدلی؟ چرا این مدل؟ نتیجه چه معنایی دارد؟»</p><table><tr><th>موضوع</th><th>نتیجهٔ اصلی</th></tr><tr><td>تمرین ۱: نمرات دانش‌آموزان</td><td>مدل ترتیبی انتخاب قابل دفاع است؛ آزمون شانس‌های متناسب رد نشده.</td></tr><tr><td>تمرین ۲: جدول‌های چندبعدی</td><td>هم‌ارزی لجستیک و لگ‌خطی دقیقاً بازتولید شد؛ مدل دوتایی هنوز نقص برازش دارد.</td></tr><tr><td>تمرین ۳: ساعات غیبت</td><td>مدل دوجمله‌ای منفی، بهترین AIC و BIC را دارد.</td></tr><tr><td>تمرین ۴: نمرات ریاضی ایتالیا</td><td>مدل سه‌سطحی با ۴۰۰ مدرسه و ۷۵۷ کلاس اجرا شده و هر دو واریانس تصادفی برآورد شده‌اند.</td></tr></table></section>
+<section class="card"><h2>Assignment 1 — Exercise 1</h2><h3>هدف</h3><p>پیش‌بینی سطح عملکرد در درس ریاضی با استفاده از نمرهٔ نهایی و ویژگی‌های دانش‌آموزان.</p><pre>G3: Low = 0–9 | Medium = 10–14 | High = 15–20
+Predictors: studytime, failures, absences, Medu, Fedu</pre><p>مدل چندجمله‌ای برای هر گروه نسبت به گروه مرجع ضرایب جدا دارد؛ مدل ترتیبی از ترتیب طبیعی نمره‌ها استفاده می‌کند و برای همه آستانه‌ها شیب مشترک می‌خواهد.</p><pre>Proportional-odds joint Wald test:
+chi-square(5) = 9.132
+p = 0.103924
+
+AIC: Multinomial 764.109 | Ordinal 765.309
+BIC: Multinomial 811.856 | Ordinal 793.161</pre><div class="okay"><strong>نتیجه:</strong> چون مقدار احتمال بالاتر از ۰٫۰۵ است، فرض برابری شیب‌ها رد نمی‌شود. همراه با BIC پایین‌تر و تفسیر ساده‌تر، مدل ترتیبی انتخاب مناسبی است؛ اما این آزمون برابری واقعی شیب‌ها را اثبات نمی‌کند.</div><p>ضریب شکست‌های قبلی برابر منفی ۰٫۹۲۹ است. نسبت شانس آن تقریباً ۰٫۳۹۵ است؛ یعنی افزایش یک واحدی این متغیر با کاهش شانس قرار گرفتن در سطح نمره بالاتر همراه است، با فرض درست‌بودن مدل.</p><details><summary>استاد: فرق مدل ترتیبی و چندجمله‌ای چیست؟</summary><div class="answer">مدل ترتیبی از نظم طبقات و یک مجموعه شیب مشترک استفاده می‌کند؛ مدل چندجمله‌ای طبقات را اسمی می‌بیند و برای هر مقایسه شیب مستقل دارد.<div class="en">Ordinal logistic regression exploits the natural ordering of the outcome and assumes parallel cumulative-logit slopes. Multinomial logistic regression treats categories as nominal and estimates separate slopes for each category comparison.</div></div></details><details><summary>استاد: فرض شانس‌های متناسب چیست؟</summary><div class="answer">اثر هر پیش‌بین روی لگاریتم شانس تجمعی در همه آستانه‌ها ثابت است.<div class="en">The proportional-odds assumption means each predictor has the same slope across all cumulative cutoffs. Our joint Brant-type test gives p = 0.104, so we do not reject the assumption at 5%.</div></div></details></section>
+<section class="card"><h2>Assignment 1 — Exercise 2</h2><p>سه متغیر دسته‌ای جنسیت، گروه نژادی و سطح تحصیلات در جدول ۳۰ سلولی با جمع <strong>۳۲٬۵۶۱ نفر</strong> مدل‌سازی شدند.</p><pre>Model 1: [S][R][E]              Mutual independence
+Model 2: [SE][RE]               S independent of R given E
+Model 3: [SR][SE][RE]           All two-way associations
+Model 4: [SRE]                  Saturated reference</pre><table><tr><th>مدل</th><th>Deviance</th><th>درجه آزادی</th></tr><tr><td>استقلال کامل</td><td>1104.683</td><td>22</td></tr><tr><td>استقلال شرطی</td><td>436.612</td><td>12</td></tr><tr><td>همه برهم‌کنش‌های دوتایی</td><td>19.297</td><td>8</td></tr></table><pre>Conditional vs all-two-way:
+Likelihood-ratio chi-square(4) = 417.315
+p ≈ 5.04e-89
+
+All-two-way goodness-of-fit:
+chi-square(8) = 19.297, p = 0.01335</pre><div class="warning">مدل دوتایی از دو مدل قبلی بهتر است، ولی هنوز در سطح ۵٪ آزمون برازش کلی را رد می‌کند؛ یعنی یک اثر سه‌طرفهٔ باقیمانده محتمل است. «بهترین مدل» لزوماً «مدل کاملاً مناسب» نیست.</div><p>هم‌ارزی لجستیک دودویی با مدل لگ‌خطی دوتایی با دقت شناور تقریباً صفر تأیید شد. نکتهٔ اساسی وجود رابطهٔ آزاد بین دو پیش‌بین در مدل لگ‌خطی است.</p><details><summary>استاد: چرا مدل لگ‌خطی و لجستیک می‌توانند معادل شوند؟</summary><div class="answer">وقتی در مدل لگ‌خطی، همهٔ تعاملات میان متغیرهای پیش‌بین آزاد باشند و جنسیت را متغیر پاسخ در نظر بگیریم، نسبت لگاریتمی شمارش‌های مرد و زن با ضرایب لجستیک یکی می‌شود.<div class="en">The hierarchical log-linear model [SR][SE][RE] is equivalent to the conditional logistic regression Sex ~ Race + Education. The logistic coefficients match the corresponding Sex interaction parameters in the Poisson log-linear model.</div></div></details></section>
+<section class="card"><h2>Assignment 1 — Exercise 3</h2><p>دادهٔ ساعات غیبت شامل ۷۴۰ مشاهده است. میانگین حدود ۶٫۹۲، واریانس حدود ۱۷۷٫۷۲ و تعداد صفرها ۴۴ عدد است. واریانس بسیار بزرگ‌تر از میانگین است؛ بنابراین فرض پواسون مناسب نیست.</p><pre>Poisson Pearson chi-square / residual df = 22.127
+Observed zeros = 44
+
+Model       AIC        BIC        Predicted zeros
+NB2         4423.985   4451.625   106.008
+ZINB2       4425.985   4458.232   106.008
+ZIP         9755.493   9783.133    44.765
+Poisson    10133.249  10156.282     1.754</pre><div class="okay"><strong>انتخاب نهایی:</strong> مدل دوجمله‌ای منفی. مدل دارای صفر اضافیِ دوجمله‌ای منفی تقریباً هیچ بهبودی در درست‌نمایی ندارد و فقط پیچیدگی را بیشتر می‌کند.</div><p>محدودیت مهم: مدل انتخابی حدود ۱۰۶ صفر پیش‌بینی می‌کند، درحالی‌که ۴۴ صفر مشاهده شده است؛ پس بهترین AIC به معنای بی‌نقص بودن مدل نیست.</p><details><summary>استاد: تفاوت پواسون و دوجمله‌ای منفی چیست؟</summary><div class="answer">پواسون میانگین و واریانس برابر فرض می‌کند؛ دوجمله‌ای منفی با پارامتر پراکندگی، واریانس بزرگ‌تر را مدل می‌کند.<div class="en">For a Poisson model, Var(Y|X) = E(Y|X) = mu. For NB2, Var(Y|X) = mu + alpha*mu², which accommodates overdispersion.</div></div></details><details><summary>استاد: در مدل دارای صفر اضافی دو مجموعه ضریب چه معنی دارد؟</summary><div class="answer">بخش شمارشی شدت شمارش را در فرایند شمارش تعیین می‌کند و بخش صفر اضافی احتمال عضویت در گروه همیشه‌صفر را مدل می‌کند. صفر مشاهده‌شده می‌تواند از هر دو مسیر تولید شود.<div class="en">The count coefficients describe the rate of the latent count-generating process. The inflation coefficients describe the log-odds of structural-zero membership. A zero can arise from either component.</div></div></details></section>
+<section class="card"><h2>Assignment 2 — Multilevel Models</h2>
+<div class="okay"><strong>وضعیت نهایی:</strong> مدل سه‌سطحی با اکسل اصلی و فرهنگ متغیرهای استاد دوباره اجرا شده است؛ هر سه برازش ML و REML همگرا شدند.</div>
+<p>سؤال پژوهشی: چه عوامل فردی و محیطی با نمرهٔ ریاضی پایهٔ پنجم مرتبط‌اند، وقتی دانش‌آموزان داخل کلاس‌ها و کلاس‌ها داخل مدارس قرار دارند؟</p>
+<pre>Response: WLE_MATH_200 (continuous IRT score)
+Original N: 16,244 | Complete cases: 9,623
+Schools: 400 | Classes: 757
+Random effects: school + class within school
+
+Y_ijk = X_ijk*beta + u_school,k + v_class,jk + error_ijk</pre>
+<h3>چرا داده‌ها را پاک‌سازی کردیم؟</h3><p>در فرهنگ داده، کد ۹ برای پیشینهٔ مهاجرت یا پیش‌دبستانی نشان‌دهندهٔ مقدار گمشده است؛ اما عدد ۹ برای <strong>ماه تولد سپتامبر</strong> است. مقدار گمشدهٔ ماه با ۹۹ تعریف می‌شود. ماه و سال تولد را دسته‌ای در مدل گذاشتیم.</p>
+<div class="warning">از ۱۶٬۲۴۴ رکورد، ۶٬۶۲۱ رکورد حذف شدند (۴۰٫۸٪). سهم داده‌های باقی‌مانده بین مناطق از ۵۰٫۷٪ تا ۶۵٫۱٪ متفاوت است. بنابراین حذف‌ها ممکن است باعث سوگیری انتخاب شوند.</div>
+<h3>اثرات ثابت مهم</h3>
+<table><tr><th>متغیر و گروه مرجع</th><th>ضریب</th><th>مقدار احتمال</th></tr>
+<tr><td>دختر در مقابل پسر</td><td>-10.197</td><td>&lt;0.001</td></tr>
+<tr><td>مهاجر نسل اول در برابر بومی</td><td>-7.493</td><td>0.0018</td></tr>
+<tr><td>مهاجر نسل دوم در برابر بومی</td><td>-6.622</td><td>&lt;0.001</td></tr>
+<tr><td>شاخص فردی اجتماعی‌اقتصادی</td><td>+3.302</td><td>0.00038</td></tr>
+<tr><td>شاخص اجتماعی‌اقتصادی کلاس</td><td>+1.800</td><td>0.223</td></tr>
+<tr><td>جنوب و جزایر نسبت به شمال‌غرب</td><td>-5.513</td><td>0.0158</td></tr>
+</table>
+<p>ضریب فردی مثبت و از نظر آماری معنادار است؛ اما شاخص سطح کلاس با وجود مثبت‌بودن، در سطح ۵٪ معنادار نیست. این ضرایب <strong>ارتباط شرطی</strong> هستند، نه علت و معلول.</p>
+<h3>اثرات تصادفی و ICC</h3>
+<pre>School variance:   66.234
+Class variance:   122.458
+Residual variance: 1027.225
+
+Different classes, same school ICC: 5.45%
+Same classroom ICC:              15.52%</pre>
+<p>دانش‌آموزان هم‌کلاسی دو منبع تغییرات مشترک دارند: مدرسه و کلاس. دانش‌آموزان در کلاس‌های مختلف یک مدرسه تنها بخش مدرسه را مشترک دارند.</p>
+<h3>مقایسهٔ مدل کامل و ساده‌تر</h3>
+<pre>Reduced model AIC = 95670.149
+Full model AIC    = 94963.403
+Likelihood ratio chi-square(40) = 786.746
+p = 2.50e-139</pre>
+<p>برای مقایسهٔ مدل‌هایی که متغیرهای ثابت متفاوت دارند از ML استفاده کردیم، نه REML. سپس برای نتایج نهایی مدل کامل از REML استفاده کردیم.</p>
+<details><summary>سؤال: چرا مدل چندسطحی را انتخاب کردی؟</summary><div class="answer">چون مشاهده‌های یک کلاس یا مدرسه مستقل کامل نیستند و عوامل مشترکی دارند؛ مدل تصادفی این همبستگی را لحاظ می‌کند.<div class="en">Students nested in the same classroom or school share unobserved conditions. Random intercepts account for within-group correlation, and the dataset includes 400 campuses and 757 distinct classes.</div></div></details>
+<details><summary>سؤال: نسبت همبستگی دانش‌آموزان هم‌کلاسی را چطور محاسبه کردی؟</summary><div class="answer">جمع واریانس کلاس و مدرسه تقسیم بر مجموع سه واریانس مدل است.<div class="en">ICC_same_class = (66.234+122.458)/(66.234+122.458+1027.225) = 0.1552, or 15.52%.</div></div></details>
+<details><summary>سؤال: چرا برای مقایسه از ML استفاده کردی و نه REML؟</summary><div class="answer">چون تعداد و نوع متغیرهای ثابت در دو مدل متفاوت است؛ درست‌نمایی REML در این مقایسه‌ها مستقیم قابل‌مقایسه نیست.<div class="en">We compared the full and reduced fixed-effects specifications with maximum likelihood. The nested likelihood-ratio test gave chi-square(40)=786.746, p&lt;0.001; the full model had lower AIC.</div></div></details>
+<details><summary>سؤال: ضریب شاخص اجتماعی‌اقتصادی فردی چه می‌گوید؟</summary><div class="answer">افزایش یک واحد در شاخص فردی با حدود ۳٫۳۰ واحد نمرهٔ ریاضی بیشتر همراه است، وقتی بقیهٔ متغیرهای مدل ثابت نگه داشته شوند.<div class="en">A one-unit increase in ESCS_student is associated with a 3.302-point higher expected mathematics score, adjusting for the other covariates and random intercepts.</div></div></details>
+<details><summary>سؤال: بزرگ‌ترین محدودیت تحقیق چیست؟</summary><div class="answer">حذف حدود ۴۱٪ داده‌ها، استفاده‌نکردن از وزن‌های نمونه‌گیری و مشاهده‌ای‌بودن داده‌ها.<div class="en">Complete-case analysis removes 40.8% of records, with uneven geographic retention. The fit is unweighted despite two-stage sampling. These estimates support association, not causation.</div></div></details>
+</section>
+<section class="card"><h2>مرور نهایی پیشنهادی</h2><ul><li>۲۰ دقیقه: مدل ترتیبی و فرض شانس‌های متناسب.</li><li>۲۰ دقیقه: جداول لگ‌خطی، آزمون‌های نسبت درست‌نمایی و هم‌ارزی لجستیک.</li><li>۲۰ دقیقه: تفاوت پواسون، دوجمله‌ای منفی و مدل‌های صفر اضافی.</li><li>۲۰ دقیقه: ساختار چندسطحی، اثرات ثابت/تصادفی و محدودیت‌های داده.</li><li>۱۰ دقیقه: سؤال‌های بازشوندهٔ همین صفحه را بدون نگاه به پاسخ جواب بده.</li></ul></section><p class="footer">بر اساس صورت سؤال‌های استاد، کدهای پروژه و بازاجرای هر دو تکلیف · تهیه‌شده ۱۲ اکتبر ۲۰۲۶</p></main></body></html>

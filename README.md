@@ -20,17 +20,12 @@ The lab sessions and assignments cover:
 *(Located in `moduleA/Assignment1` and `moduleA/Assignment2`)*
 
 ### 📊 Module B: Advanced Statistical Learning
-This module focuses on Generalized Linear Models (GLMs) and advanced statistical techniques to analyze real-world datasets (e.g., student performance, census data, and absenteeism at work) using `pandas` and `statsmodels`.
+Two completed university assignments under [Module B](moduleB/README_COMPLETED.md):
+- **Assignment 1 — Generalized Linear Models:** three exercises covering (1) multinomial and ordinal logistic regression, (2) log-linear modeling and logistic equivalence, and (3) count regression using Poisson, Negative Binomial, ZIP, and ZINB. [Executed notebook](moduleB/Assignment1/assignment1.ipynb) · [English report](moduleB/Assignment1/assignment1_report.pdf)
+- **Assignment 2 — Multilevel Educational Modeling:** mixed-effects regression of INVALSI grade-five mathematics scores with nested school and class effects. [Executed notebook](moduleB/Assignment2/project/assignment2.ipynb) · [English report](moduleB/Assignment2/assignment2_report.pdf)
+- Persian report translations and bilingual exam revision guides are collected under [Exam_Review](moduleB/Exam_Review/). Use the English reports for official submission.
 
-The assignments cover:
-- **Assignment 1:** Categorical Data Analysis & Log-Linear Models [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleB/Assignment1/assignment1.ipynb)
-  - Multinomial and Ordinal Logistic Regression (Proportional Odds Model).
-  - Analyzing multi-way contingency tables and their equivalence to Logistic Regression.
-- **Assignment 2:** Count Data Modeling [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleB/Assignment2/project/assignment2.ipynb)
-  - Poisson and Negative Binomial Regression.
-  - Handling overdispersion and zero-inflation using Zero-Inflated Poisson (ZIP) and Zero-Inflated Negative Binomial (ZINB) models.
-
-*(Located in `moduleB/Assignment1` and `moduleB/Assignment2`)*
+For Module B dependencies, run `pip install -r moduleB/requirements.txt`. The original datasets and the entire Module A tree are preserved.
 
 ## 🛠️ Installation & Setup
 

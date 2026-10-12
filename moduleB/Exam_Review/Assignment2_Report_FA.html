@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>گزارش فارسی تکلیف دوم</title><style>
+@page { size: A4; margin: 17mm 16mm 16mm 16mm; }
+* { box-sizing:border-box }
+body {font-family:"Noto Naskh Arabic", "Noto Sans Arabic", serif;direction:rtl;text-align:right;color:#202934;background:#fff;font-size:11.8pt;line-height:1.76;margin:0}
+.container{max-width:940px;margin:auto}
+h1,h2,h3{font-family:"Noto Sans Arabic",sans-serif;letter-spacing:-.1px;break-after:avoid}
+h1{font-size:22pt;font-weight:800;color:#162e4c;line-height:1.6;margin:0 0 2px}
+h2{font-size:15.3pt;font-weight:700;color:#164368;border-bottom:1px solid #c7d5df;margin:19px 0 9px;padding-bottom:4px}
+h3{font-size:12.8pt;font-weight:700;color:#273d56;margin:15px 0 7px}
+p{margin:5px 0 9px;text-align:justify;orphans:3;widows:3}
+.subtitle{font-size:10.7pt;color:#4b6780;margin:0 0 13px}
+.coverhead{border-bottom:3px solid #1d506e;padding-bottom:13px;margin:0 0 15px}
+.meta{font-size:9pt;color:#647381;margin:8px 0 10px}
+.note{border-right:3px solid #42759b;padding:6px 11px;background:#f5f8fa;font-size:10.8pt;break-inside:avoid}
+.tablewrap{margin:11px 0 13px;break-inside:avoid}
+table{border-collapse:collapse;width:100%;font-size:9.55pt;line-height:1.5;table-layout:auto}
+th,td{padding:6px 8px;border-bottom:1px solid #d8e1e7;vertical-align:middle;text-align:right;overflow-wrap:anywhere}
+th{background:#e9f0f5;color:#17405c;font-family:"Noto Sans Arabic",sans-serif;font-size:9pt;font-weight:700}
+tr:nth-child(even) td{background:#fafcfd}
+tr{break-inside:avoid}
+.smalltable{font-size:8.5pt}
+.smalltable th,.smalltable td{padding:6px}
+.num{font-family:"DejaVu Sans",sans-serif;direction:ltr;unicode-bidi:isolate;display:inline-block;font-size:.88em}
+.en{font-family:"DejaVu Sans",sans-serif;direction:ltr;unicode-bidi:isolate;display:inline;font-size:.86em;overflow-wrap:anywhere}
+.math{display:block; direction:ltr; text-align:center; font-family:"DejaVu Sans",sans-serif;font-size:10pt;margin:10px 0;padding:9px;background:#f5f8fb}
+figure{margin:15px 0;break-inside:avoid}
+figure img{display:block;width:100%;max-width:100%;height:auto;border:1px solid #dce5ea}
+figcaption{color:#526373;font-size:9pt;margin-top:5px}
+ul{margin:5px 0 13px;padding-right:22px}
+li{margin:5px 0}
+hr{border:0;border-top:1px solid #c6d2db;margin:18px 0}
+strong{font-weight:700}
+.endnote{font-size:9pt;color:#657283;border-top:1px solid #d0d8e1;margin-top:22px;padding-top:6px}
+@media screen{body{background:#eef2f5}.container{background:white;box-shadow:0 5px 40px #9bafbc4a;padding:34px 46px;margin:30px auto;}}
+@media print{.container{padding:0}.coverhead{break-after:avoid}}
+</style></head><body><main class="container"><header class="coverhead"><h1>گزارش فارسی تکلیف دوم</h1><p class="subtitle">مدل‌سازی چندسطحی داده‌های آموزشی | داده‌های INVALSI ایتالیا</p><div class="meta">ماژول B • امید شجاعیان زنجانی • ۱۲ اکتبر ۲۰۲۶ • ترجمه فارسی گزارش نهایی انگلیسی</div></header>
+<h2>۱. هدف پژوهش و منبع داده‌ها</h2>
+<p>این تکلیف رابطه میان عملکرد استانداردشده ریاضی و پیشینه دانش‌آموزان را در یک ساختار آموزشی سه‌سطحی بررسی می‌کند: دانش‌آموزان در کلاس‌ها قرار دارند و کلاس‌ها در مجموعه‌های مدرسه‌ای (پایه پنجم دبستان ایتالیا، <span class="en">G05</span>). داده اصلی <span class="en">INVALSI_data_MAT_2324.xlsx</span> است و تعریف متغیرها و کدهای داده گمشده با فایل <span class="en">MAT_05-2023-24_datadescription.xlsx</span> تأیید شده‌اند. متغیر پاسخ <span class="en">WLE_MATH_200</span>، نمره پیوسته ریاضی بر اساس نظریه پاسخ به سؤال (<span class="en">IRT</span>) است. مطابق دستور استاد، دو نمره جایگزینِ <span class="en">math_score_raw</span> و <span class="en">math_score_percentile</span> وارد متغیرهای توضیحی نشده‌اند.</p>
+<p>تحلیل‌ها با فایل‌های اکسل اصلی ارسال‌شده، به کمک پایتون، کتابخانه <span class="en">statsmodels</span> و نوت‌بوک اجراشده به‌طور مستقل تکرار شدند. نتایج این گزارش از برازش‌های تازه حاصل شده‌اند و صرفاً کپی خروجی‌های مخزن قبلی نیستند.</p>
+
+<h2>۲. پاک‌سازی داده‌ها، مقادیر گمشده و نمایندگی نمونه</h2>
+<div class="tablewrap"><table><tr><th>شاخص</th><th>مقدار مشاهده‌شده</th><th>توضیح</th></tr>
+<tr><td>رکورد اولیه دانش‌آموزان</td><td><span class="num">16,244</span></td><td>یک ردیف برای هر دانش‌آموز</td></tr>
+<tr><td>رکورد کاملِ قابل تحلیل</td><td><span class="num">9,623 (59.24%)</span></td><td><span class="num">6,621</span> حذف‌شده (<span class="num">40.76%</span>)</td></tr>
+<tr><td>واحدهای مدرسه‌ای</td><td><span class="num">400</span></td><td>شناسه مدرسه بعد از پاک‌سازی</td></tr>
+<tr><td>کلاس‌های تودرتو</td><td><span class="num">757</span></td><td>شناسه ترکیبیِ یکتای مدرسه–کلاس</td></tr>
+<tr><td>تعداد کلاس در هر مدرسه</td><td><span class="num">357</span> مدرسه با ۲ کلاس؛ <span class="num">43</span> مدرسه با ۱ کلاس</td><td>امکان تشخیص دو مؤلفه واریانس</td></tr>
+<tr><td>میانگین نمره ریاضی</td><td><span class="num">197.800 (SD 37.392)</span></td><td>بین ۹٬۶۲۳ مشاهده کامل</td></tr>
+</table></div>
+<p>پاک‌سازی بر اساس فرهنگ متغیرها انجام شد: عدد ۹ در متغیرهای منشأ مهاجرت و حضور در مهد کودک/پیش‌دبستانی علامت داده گمشده است؛ عدد ۹۹ در تحصیلات و شغل والدین نیز داده گمشده را مشخص می‌کند. جنسیت با کد ۹، سال تولد با کد ۹ و ماه تولد با کد ۹۹ نیز در صورت وجود نامعتبر به شمار می‌روند. <strong>نکته مهم:</strong> ماه تولد ۹ به معنی سپتامبر است و نباید حذف شود. در متغیر تحصیلات والدین، کد ۹ یک سطح تحصیلی معتبر است، ولی ۹۹ گمشده است. مقادیر غیرعددی شاخص <span class="en">ESCS</span> به داده گمشده تبدیل شدند و فقط رکوردهای کاملِ متغیرهای انتخاب‌شده باقی ماندند.</p>
+<div class="tablewrap"><table><tr><th>ناحیه جغرافیایی</th><th>رکوردهای باقی‌مانده / کل</th><th>درصد باقی‌مانده</th></tr>
+<tr><td>۱ — شمال‌غرب</td><td><span class="num">2,060 / 3,164</span></td><td><span class="num">65.11%</span></td></tr>
+<tr><td>۲ — شمال‌شرق</td><td><span class="num">2,029 / 3,263</span></td><td><span class="num">62.18%</span></td></tr>
+<tr><td>۳ — مرکز</td><td><span class="num">1,691 / 3,022</span></td><td><span class="num">55.96%</span></td></tr>
+<tr><td>۴ — جنوب</td><td><span class="num">2,323 / 3,797</span></td><td><span class="num">61.18%</span></td></tr>
+<tr><td>۵ — جنوب و جزایر</td><td><span class="num">1,520 / 2,998</span></td><td><span class="num">50.70%</span></td></tr>
+</table></div>
+<p>حذف رکوردها قابل توجه است و میزان باقی‌ماندن نمونه در نواحی جغرافیایی متفاوت است. میانگین نمره <span class="en">WLE_MATH_200</span> در داده خام <span class="num">195.073</span> است، درحالی‌که میانگین رکوردهای کامل <span class="num">197.800</span> است. این تفاوت احتمال گزینشِ غیرنماینده بر اثر حذف رکوردها را مطرح می‌کند؛ فرضِ «گمشدگی تصادفی مشروط» در این تحلیل اثبات نشده است.</p>
+
+<h2>۳. دسته‌بندی متغیرها و ساختار مدل</h2>
+<div class="tablewrap"><table><tr><th>سطح</th><th>متغیرها</th><th>نحوه استفاده در مدل</th></tr>
+<tr><td>دانش‌آموز — سطح ۱</td><td>جنسیت، ماه و سال تولد، منشأ مهاجرت، حضور در مهد و پیش‌دبستانی، تحصیلات و شغل والدین، شاخص اقتصادی‌اجتماعی فردی</td><td>کدهای دسته‌ای به‌شکل متغیرهای عامل؛ شاخص فردی <span class="en">ESCS_student</span> پیوسته</td></tr>
+<tr><td>کلاس — سطح ۲</td><td><span class="en">ESCS_class</span> و <span class="en">CLASS_ANONYMIZED</span></td><td>شاخص اقتصادی‌اجتماعی کلاس: متغیر ثابت؛ برای کلاس: عرض از مبدأ تصادفیِ تودرتو</td></tr>
+<tr><td>مدرسه — سطح ۳</td><td><span class="en">SCHOOL_ANONYMIZED</span></td><td>عرض از مبدأ تصادفی مدرسه</td></tr>
+<tr><td>متغیر زمینه‌ای</td><td><span class="en">GeoArea_5</span></td><td>پنج ناحیه جغرافیایی؛ کد ۱ به‌عنوان مبنا</td></tr>
+</table></div>
+<p>متغیر <span class="en">Region_Code</span> در مرحله پاک‌سازی بررسی شد، ولی به فرمول مدل راه نیافت؛ چون متغیر <span class="en">GeoArea_5</span> زمینه جغرافیایی گسترده‌تری را پوشش می‌دهد. داده خام وزن‌های نمونه‌گیری دارد، اما این مدل آمیخته بدون وزن برازش شده است؛ پس نتایج آن را نباید خودبه‌خود برآوردهای ملیِ وزن‌دهی‌شده مطابق طرح نمونه‌گیری دانست.</p>
+
+<h2>۴. مشخصات مدل و روش برآورد</h2>
+<p>مدل خطی آمیخته به صورت زیر است:</p>
+<div class="math">Yᵢⱼₖ = Xᵢⱼₖ β + uₖ + vⱼₖ + eᵢⱼₖ</div>
+<p>در این رابطه، <span class="en">uₖ</span> عرض از مبدأ تصادفیِ مدرسه، <span class="en">vⱼₖ</span> عرض از مبدأ تصادفیِ کلاس درون همان مدرسه و <span class="en">eᵢⱼₖ</span> باقیمانده فردی است. این اجزا مستقل و دارای توزیع نرمال فرض شده‌اند و واریانس‌های جداگانه برای مدرسه، کلاس و خطای فردی دارند. مدل کامل، تمام متغیرهای ثابت بخش سوم و ناحیه جغرافیایی را شامل می‌شود. ماه و سال تولد مطابق فرهنگ متغیرها دسته‌ای در نظر گرفته شدند.</p>
+<p>برای بررسی اینکه آیا متغیرهای خانواده و موقعیت اقتصادی‌اجتماعی به بهبود برازش کمک می‌کنند یا نه، یک مدل ساده‌تر تنها با جنسیت، ماه و سال تولد، منشأ مهاجرت و منطقه جغرافیایی برازش شد. مدل ساده و کامل با روش بیشینه درست‌نمایی (<span class="en">ML</span>) و روی دانش‌آموزان یکسان و ساختار تصادفی یکسان مقایسه شدند. برای ضرایب نهایی مدل کامل، از برآورد بیشینه درست‌نمایی محدودشده (<span class="en">REML</span>) استفاده شد. هر سه فرایند بهینه‌سازی همگرا شدند.</p>
+<div class="tablewrap"><table><tr><th>مدل <span class="en">ML</span></th><th>لگاریتم درست‌نمایی</th><th><span class="en">AIC</span></th><th><span class="en">BIC</span></th></tr>
+<tr><td>مدل ساده‌تر</td><td><span class="num">-47,810.074</span></td><td><span class="num">95,670.149</span></td><td><span class="num">95,849.447</span></td></tr>
+<tr><td>مدل کامل</td><td><span class="num">-47,416.701</span></td><td><span class="num">94,963.403</span></td><td><span class="num">95,429.577</span></td></tr></table></div>
+<p>آزمون نسبت درست‌نمایی: <span class="num">χ²(40)=786.746</span> و <span class="num">p=2.5×10⁻¹³⁹</span>. مدل کامل از لحاظ آماری برازش بسیار بهتری از مدل ساده دارد. بااین‌حال، این برتری به این معنا نیست که تمام ضرایب اضافه‌شده به‌تنهایی معنادارند یا اهمیت علّی دارند.</p>
+
+<h2>۵. نتایج اثرات ثابت و تفسیر کاربردی</h2>
+<div class="tablewrap"><table><tr><th>اثر ثابت (گروه مرجع)</th><th>برآورد</th><th>خطای استاندارد</th><th>مقدار <span class="en">p</span></th></tr>
+<tr><td>دختر در برابر پسر</td><td><span class="num">-10.197</span></td><td><span class="num">0.671</span></td><td><span class="num">3.649×10⁻⁵²</span></td></tr>
+<tr><td>مهاجر نسل اول در برابر بومی</td><td><span class="num">-7.493</span></td><td><span class="num">2.405</span></td><td><span class="num">0.001834</span></td></tr>
+<tr><td>مهاجر نسل دوم در برابر بومی</td><td><span class="num">-6.622</span></td><td><span class="num">1.338</span></td><td><span class="num">7.434×10⁻⁷</span></td></tr>
+<tr><td>عدم حضور در مهد در برابر حضور</td><td><span class="num">-3.199</span></td><td><span class="num">0.753</span></td><td><span class="num">2.13×10⁻⁵</span></td></tr>
+<tr><td>عدم حضور در پیش‌دبستانی در برابر حضور</td><td><span class="num">-1.464</span></td><td><span class="num">2.155</span></td><td><span class="num">0.4969</span></td></tr>
+<tr><td>شاخص اقتصادی‌اجتماعی دانش‌آموز</td><td><span class="num">+3.302</span></td><td><span class="num">0.930</span></td><td><span class="num">0.0003823</span></td></tr>
+<tr><td>شاخص اقتصادی‌اجتماعی کلاس</td><td><span class="num">+1.800</span></td><td><span class="num">1.477</span></td><td><span class="num">0.2229</span></td></tr>
+<tr><td>جنوب و جزایر در برابر شمال‌غرب</td><td><span class="num">-5.513</span></td><td><span class="num">2.285</span></td><td><span class="num">0.01582</span></td></tr>
+<tr><td>تحصیلات پدر: دکتری در برابر ابتدایی</td><td><span class="num">+15.940</span></td><td><span class="num">5.199</span></td><td><span class="num">0.002169</span></td></tr>
+<tr><td>تحصیلات مادر: دکتری در برابر ابتدایی</td><td><span class="num">+15.512</span></td><td><span class="num">5.319</span></td><td><span class="num">0.003543</span></td></tr>
+</table></div>
+<p>با ثابت نگه‌داشتن سایر متغیرهای اندازه‌گیری‌شده و عرض از مبدأهای تصادفی، نمره موردانتظار دانش‌آموزان دختر (کد ۲) در این نمونه حدود <span class="num">10.20</span> واحد کمتر از دانش‌آموزان پسر (کد ۱) است. در مقایسه با دانش‌آموزان بومی، نمره گروه مهاجر نسل اول حدود <span class="num">7.49</span> و نسل دوم حدود <span class="num">6.62</span> واحد پایین‌تر برآورد شده است. عدم حضور در مهد کودک با حدود <span class="num">3.20</span> واحد نمره کمتر نسبت به حضور همراه است. ضریب حضور در پیش‌دبستانی در سطح پنج درصد معنادار نیست.</p>
+<p>افزایش یک واحد در <span class="en">ESCS_student</span> با حدود <span class="num">3.30</span> واحد نمره بیشتر همراه است (<span class="num">p=0.00038</span>). ضریب <span class="en">ESCS_class</span> مثبت (<span class="num">+1.80</span>) ولی از نظر آماری نامعنادار است (<span class="num">p=0.223</span>). گروه «جنوب و جزایر» (کد ۵) پس از تعدیل سایر عوامل، نسبت به «شمال‌غرب» (کد ۱) حدود <span class="num">5.51</span> واحد نمره پایین‌تر دارد (<span class="num">p=0.0158</span>). بسیاری از دسته‌های تحصیلات بالاتر والدین، نسبت به تحصیلات ابتدایی همراهی مثبت نشان می‌دهند؛ البته اندازه دسته‌های مرجع و مسئله آزمون‌های متعدد باید در تفسیر در نظر گرفته شوند.</p>
+<p>ماه تولد به‌صورت دسته‌ای وارد مدل شد تا فرض خطی‌بودن اجباری بر آن تحمیل نشود. برآوردهای تعدیل‌شده برای ماه‌های دیرترِ سال نسبت به ژانویه عموماً منفی‌تر بوده‌اند؛ این الگو می‌تواند با اثر نسبی سن سازگار باشد، ولی رابطه علّی را اثبات نمی‌کند.</p>
+
+<h2>۶. اثرات تصادفی، خوشه‌بندی و همبستگی درون‌خوشه‌ای</h2>
+<div class="tablewrap"><table><tr><th>پارامتر</th><th>برآورد <span class="en">REML</span></th><th>تفسیر</th></tr>
+<tr><td>واریانس بین مدرسه‌ها</td><td><span class="num">66.234</span></td><td>تفاوت‌های مشترک در سطح مدرسه</td></tr>
+<tr><td>واریانس بین کلاس‌ها درون مدرسه</td><td><span class="num">122.458</span></td><td>تفاوت مشترک اضافی در سطح کلاس</td></tr>
+<tr><td>واریانس باقیمانده درون کلاس</td><td><span class="num">1,027.225</span></td><td>تغییرپذیری فردیِ توضیح‌داده‌نشده</td></tr>
+<tr><td><span class="en">ICC</span> دانش‌آموزان از کلاس‌های مختلفِ یک مدرسه</td><td><span class="num">0.0545 (5.45%)</span></td><td>همبستگی ناشی از بخش مشترک مدرسه</td></tr>
+<tr><td><span class="en">ICC</span> دانش‌آموزان یک کلاس</td><td><span class="num">0.1552 (15.52%)</span></td><td>همبستگی ناشی از مدرسه و کلاس مشترک</td></tr>
+</table></div>
+<p>مثبت‌بودن واریانس‌های برآورد‌شده نشان می‌دهد در این نمونه می‌توان مؤلفه‌های جداگانه مدرسه و کلاس تودرتو را شناسایی کرد. همبستگی درون‌خوشه‌ای از تجزیه واریانسِ مدل با عرض از مبدأهای تصادفی مستقل محاسبه شده است؛ این مقدار به معنای آن نیست که «هویت مدرسه» عامل علّی <span class="num">5.45%</span> از عملکرد دانش‌آموز است.</p>
+
+<h2>۷. بررسی‌های تشخیصی و محدودیت‌ها</h2>
+<figure><img src="file:///mnt/data/Module_B_Completion/Assignment2/results/diagnostics.png" alt="نمودار باقیمانده‌ها"/><figcaption>شکل ۱. نمودار باقیمانده‌ها در برابر مقادیر برازش‌شده، هیستوگرام و نمودار Q-Q نرمال برای مدل نهایی REML. رگه‌های مورب با ماهیت تا حدی گسسته نمرات مبتنی بر IRT مرتبط‌اند.</figcaption></figure>
+<p>میانگین باقیمانده‌های شرطی تقریباً صفر و انحراف معیار آن‌ها <span class="num">31.13</span> است. هیستوگرام عمدتاً حول صفر و تقریباً متقارن است، اما نمودار <span class="en">Q-Q</span> در دُم‌ها، به‌ویژه در سمت بالا، انحراف از نرمال را نشان می‌دهد. نمودار باقیمانده در برابر مقدار برازش‌شده، ابر نقطه‌ای متراکم و نواری دارد. بررسی بصری به‌تنهایی همسانی دقیق واریانس یا نرمال‌بودن کامل دُم‌ها را تضمین نمی‌کند. مقدارهای <span class="en">p</span> اثرات ثابت مشروط به فروض مدل و تقریب‌های نمونه بزرگ هستند.</p>
+<ul><li>حذف رکوردهای ناقص <span class="num">40.76%</span> از نمونه اولیه را کنار می‌گذارد و نسبت نگه‌داری در مناطق مختلف یکسان نیست؛ بنابراین سوگیری گزینش ممکن است وجود داشته باشد.</li>
+<li>وزن‌های نامساوی نمونه‌گیری دانش‌آموزان/مدارس و طرح پیمایش طبقه‌بندی‌شده در برازش بدون وزن این مدل لحاظ نشده‌اند.</li>
+<li>داده مقطعی مشاهده‌ای نمی‌تواند آثار علّی جنسیت، وضعیت اقتصادی خانواده، منشأ مهاجرت، کیفیت معلم یا آموزش اولیه را شناسایی کند.</li>
+<li>شیب‌های تصادفی، روش‌های جایگزین مدیریت گمشدگی و مدل‌های سلسله‌مراتبیِ سازگار با وزن‌های پیمایش، مسیرهای تکمیلی معقول‌اند؛ ولی از برازش فعلی نتیجه نمی‌شوند.</li></ul>
+
+<h2>۸. نتیجه‌گیری</h2>
+<p>تحلیل اصلاح‌شده از به‌کارگیری مدل خطی آمیخته گاوسی سه‌سطحی برای نمرات ریاضی پایه پنجم در داده‌های <span class="en">INVALSI</span> پشتیبانی می‌کند. در این مدل، واریانس غیرصفر مدرسه و کلاس به‌طور جداگانه شناسایی شده و شواهدی وجود دارد که متغیرهای جمعیت‌شناختی، آموزش اولیه، خانواده و وضعیت اقتصادی‌اجتماعی فردی، برازش مدل را بهبود می‌دهند. شاخص فردی <span class="en">ESCS</span> اثر مثبت و از نظر آماری معنادار دارد؛ در مقابل، شاخص اقتصادی‌اجتماعی کلاس به‌تنهایی معنادار نیست. به‌دلیل حجم زیاد مقادیر گمشده و ساده‌سازی طرح نمونه‌گیری، نتایج باید به‌عنوان همراهی آماری مشروط به رکوردهای کاملِ بررسی‌شده تفسیر شوند، نه یافته علّی یا برآورد وزن‌خورده ملی.</p>
+
+<h2>منابع و فایل‌های بازتولید و تحویل</h2>
+<p>منابع: <span class="en">Instructions_2.pdf</span> (استاد <span class="en">Giulia Vannucci</span>، ۲۶ نوامبر ۲۰۲۵)، فایل‌های <span class="en">INVALSI_data_MAT_2324.xlsx</span> و <span class="en">MAT_05-2023-24_datadescription.xlsx</span>. کد: نوت‌بوک اجراشده <span class="en">assignment2.ipynb</span>؛ جدول‌های برازش و مقایسه مدل‌ها و نمودار تشخیصی در پوشه <span class="en">results/</span>. پوشه تحویل: <span class="en">Assignments / Assignment2 / name_surname_assignment2</span> شامل PDF، کد و یادداشت فردی/گروهی.</p>
+<p class="endnote">این سند ترجمه فارسی گزارش انگلیسی نهایی پروژه است. اعداد و نتایج آماری از همان گزارش گرفته شده‌اند. توضیحات، همبستگی آماری را نشان می‌دهند و دلالت بر علیت ندارند.</p></main></body></html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>گزارش فارسی تکلیف اول</title><style>
+@page { size: A4; margin: 17mm 16mm 16mm 16mm; }
+* { box-sizing:border-box }
+body {font-family:"Noto Naskh Arabic", "Noto Sans Arabic", serif;direction:rtl;text-align:right;color:#202934;background:#fff;font-size:11.8pt;line-height:1.76;margin:0}
+.container{max-width:940px;margin:auto}
+h1,h2,h3{font-family:"Noto Sans Arabic",sans-serif;letter-spacing:-.1px;break-after:avoid}
+h1{font-size:22pt;font-weight:800;color:#162e4c;line-height:1.6;margin:0 0 2px}
+h2{font-size:15.3pt;font-weight:700;color:#164368;border-bottom:1px solid #c7d5df;margin:19px 0 9px;padding-bottom:4px}
+h3{font-size:12.8pt;font-weight:700;color:#273d56;margin:15px 0 7px}
+p{margin:5px 0 9px;text-align:justify;orphans:3;widows:3}
+.subtitle{font-size:10.7pt;color:#4b6780;margin:0 0 13px}
+.coverhead{border-bottom:3px solid #1d506e;padding-bottom:13px;margin:0 0 15px}
+.meta{font-size:9pt;color:#647381;margin:8px 0 10px}
+.note{border-right:3px solid #42759b;padding:6px 11px;background:#f5f8fa;font-size:10.8pt;break-inside:avoid}
+.tablewrap{margin:11px 0 13px;break-inside:avoid}
+table{border-collapse:collapse;width:100%;font-size:9.55pt;line-height:1.5;table-layout:auto}
+th,td{padding:6px 8px;border-bottom:1px solid #d8e1e7;vertical-align:middle;text-align:right;overflow-wrap:anywhere}
+th{background:#e9f0f5;color:#17405c;font-family:"Noto Sans Arabic",sans-serif;font-size:9pt;font-weight:700}
+tr:nth-child(even) td{background:#fafcfd}
+tr{break-inside:avoid}
+.smalltable{font-size:8.5pt}
+.smalltable th,.smalltable td{padding:6px}
+.num{font-family:"DejaVu Sans",sans-serif;direction:ltr;unicode-bidi:isolate;display:inline-block;font-size:.88em}
+.en{font-family:"DejaVu Sans",sans-serif;direction:ltr;unicode-bidi:isolate;display:inline;font-size:.86em;overflow-wrap:anywhere}
+.math{display:block; direction:ltr; text-align:center; font-family:"DejaVu Sans",sans-serif;font-size:10pt;margin:10px 0;padding:9px;background:#f5f8fb}
+figure{margin:15px 0;break-inside:avoid}
+figure img{display:block;width:100%;max-width:100%;height:auto;border:1px solid #dce5ea}
+figcaption{color:#526373;font-size:9pt;margin-top:5px}
+ul{margin:5px 0 13px;padding-right:22px}
+li{margin:5px 0}
+hr{border:0;border-top:1px solid #c6d2db;margin:18px 0}
+strong{font-weight:700}
+.endnote{font-size:9pt;color:#657283;border-top:1px solid #d0d8e1;margin-top:22px;padding-top:6px}
+@media screen{body{background:#eef2f5}.container{background:white;box-shadow:0 5px 40px #9bafbc4a;padding:34px 46px;margin:30px auto;}}
+@media print{.container{padding:0}.coverhead{break-after:avoid}}
+</style></head><body><main class="container"><header class="coverhead"><h1>گزارش فارسی تکلیف اول</h1><p class="subtitle">مدل‌های خطی تعمیم‌یافته | سه تمرین و نتایج اجراشده</p><div class="meta">ماژول B • امید شجاعیان زنجانی • ۱۲ اکتبر ۲۰۲۶ • ترجمه فارسی گزارش نهایی انگلیسی</div></header>
+<h2>وضعیت تحلیل، منشأ داده‌ها و بازتولیدپذیری</h2>
+<p>این گزارش حاصل تحلیل اجراشده و بررسی‌شده است. هر سه تمرین در محیط تحلیل مجدداً برازش شده‌اند و نوت‌بوک اصلاح‌شده خروجی‌های اجرایی ذخیره‌شده را در خود دارد. تمرین‌های ۱ و ۳ از استخراجِ سطر‌به‌سطرِ ستون‌های موردنیاز مجموعه‌داده‌های CSV موجود در مخزن عمومی گیت‌هاب استفاده می‌کنند: <b class="num">395</b> دانش‌آموز و <b class="num">740</b> رکورد غیبت. تمرین ۲ از جدول کامل فراوانی‌های <span class="en">Sex × Race × Education</span> با <b class="num">30</b> خانه و مجموع <b class="num">32,561</b> مشاهده استفاده می‌کند که از آرشیو گیت‌هاب بازسازی شده است. این‌ها زیرمجموعه‌های شفاف از داده‌های واقعی‌اند، نه داده‌های ساختگی. نام فایل‌های منبع، نحوه استخراج و ورودی‌های بازیابی‌شده در پوشه شواهد پروژه موجود است.</p>
+<p>موضوع: مدل‌های خطی تعمیم‌یافته، شامل سه تمرین. استاد: <span class="en">Giulia Vannucci</span>. اقلام لازم برای تحویل: گزارش، فایل کد و یادداشت فردی یا گروهی‌بودن کار. کد تحلیل: <span class="en">assignment1.ipynb</span>. هیچ نتیجه عددی ساختگی در گزارش وارد نشده است. روابط گزارش‌شده از نوع همراهی آماری‌اند، نه علت و معلول.</p>
+
+<h2>تمرین ۱ — رگرسیون لجستیک چندجمله‌ای و ترتیبی</h2>
+<h3>پرسش پژوهش و آماده‌سازی داده‌ها</h3>
+<p>در داده‌های عملکرد درسی دانش‌آموزان (درس ریاضی)، نمره نهایی <span class="en">G3</span> به سه دسته تبدیل شده است: «پایین» از <span class="num">0–9</span>، «متوسط» از <span class="num">10–14</span> و «بالا» از <span class="num">15–20</span>. نمره ۱۰ مرز معمول قبولی است و نمره ۱۵ موفقیت تحصیلی بالاتر را متمایز می‌کند. متغیرهای توضیحی همان متغیرهای نسخه قبلی پروژه‌اند: زمان مطالعه، تعداد مردودی‌های قبلی، غیبت، تحصیلات مادر و تحصیلات پدر. سطح ترتیبی تحصیلات والدین و زمان مطالعه به شکل متغیر عددی وارد شده است؛ بنابراین فرض می‌شود تأثیر افزایش یک سطح بر لگاریتم نسبت شانس‌ها خطی باشد.</p>
+<h3>مدل‌ها و نتایج</h3>
+<p>در رگرسیون لجستیک چندجمله‌ای، گروه «پایین» مبناست و نسبت شانس «متوسط در برابر پایین» و «بالا در برابر پایین» جداگانه برآورد می‌شود. رگرسیون لجستیک ترتیبی با فرض شانس‌های متناسب، برای هر متغیر توضیحی یک شیب مشترک در هر دو مرز تجمعی نمره و آستانه‌های عرض از مبدأ جداگانه در نظر می‌گیرد.</p>
+<div class="tablewrap"><table><tr><th>معیار</th><th>مدل چندجمله‌ای</th><th>مدل ترتیبی</th></tr><tr><td>تعداد مشاهده</td><td><span class="num">395</span></td><td><span class="num">395</span></td></tr><tr><td>لگاریتم درست‌نمایی</td><td><span class="num">-370.05</span></td><td><span class="num">-375.65</span></td></tr><tr><td><span class="en">AIC</span></td><td><span class="num">764.109</span></td><td><span class="num">765.309</span></td></tr></table></div>
+<p>ضرایب ثبت‌شده در مدل ترتیبی عبارت‌اند از: مردودی قبلی <span class="num">-0.9290</span> با <span class="num">p&lt;0.001</span> و نسبت شانس <span class="num">0.395</span>؛ غیبت <span class="num">-0.0299</span> با <span class="num">p=0.021</span> و نسبت شانس تقریبی <span class="num">0.971</span> برای افزایش یک واحد غیبت؛ و تحصیلات مادر <span class="num">+0.2672</span> با <span class="num">p=0.024</span> و نسبت شانس تقریبی <span class="num">1.306</span>. در این مدل، ضریب مثبت به معنای افزایش شانس قرارگرفتن در دسته‌های نمره بالاتر است و ضریب منفی عکس آن را نشان می‌دهد. در مدل چندجمله‌ای، ضرایب مردودی قبلی نیز منفی هستند: <span class="num">-0.8134</span> برای متوسط در برابر پایین و <span class="num">-1.7377</span> برای بالا در برابر پایین.</p>
+<h3>بررسی فرض اساسی و انتخاب مدل نهایی</h3>
+<p>نسخه اولیه مخزن، مقایسه درست‌نمایی مدل چندجمله‌ای با مدل ترتیبی را با مقدار <span class="num">p=0.0476</span> به‌عنوان آزمون «شانس‌های متناسب» گزارش می‌کرد. این مقایسه برای این دو خانواده مدل، که عموماً با این نوع پیش‌بین‌ها مدل‌های تودرتوی مناسب آزمون نسبت درست‌نمایی نیستند، آزمون معتبری به شمار نمی‌رود. نوت‌بوک اصلاح‌شده، دو مدل لجستیک تجمعی را برازش کرده و برابری شیب‌ها را با یک آزمون والد مشترک از نوع برانت، با برآورد واریانس مقاوم (ساندویچی)، آزموده است:</p>
+<div class="math">χ²(5) = 9.132 &nbsp; | &nbsp; p = 0.103924</div>
+<p>پس در سطح معنی‌داری پنج درصد، فرض شانس‌های متناسب <strong>رد نمی‌شود</strong>؛ البته معنادار نبودن آزمون به معنای اثبات یکسان‌بودن شیب‌ها نیست. معیار <span class="en">AIC</span> اندکی مدل چندجمله‌ای را ترجیح می‌دهد (<span class="num">764.109</span> در مقابل <span class="num">765.309</span>؛ اختلاف <span class="num">1.20</span>)؛ در مقابل، معیار <span class="en">BIC</span> مدل ترتیبیِ کم‌پارامترتر را ترجیح می‌دهد (<span class="num">793.161</span> در برابر <span class="num">811.856</span>). به دلیل سادگی و قابلیت تفسیر، مدل ترتیبی انتخاب نهایی قابل دفاعی است؛ البته قدرت آزمون و برازش مدل همچنان باید با احتیاط تفسیر شوند.</p>
+<p><strong>نتیجه تمرین ۱:</strong> مردودی و غیبت بیشتر با عملکرد ضعیف‌تر در ریاضی همراه‌اند، و تحصیلات بالاتر مادر با عملکرد بهتر همراه است. آزمون مشترک فرض شانس‌های متناسب در سطح پنج درصد معنی‌دار نبود و <span class="en">BIC</span> نیز مدل ترتیبی را ترجیح می‌دهد.</p>
+
+<h2>تمرین ۲ — مدل‌های لگ‌خطی و هم‌ارزی با رگرسیون لجستیک</h2>
+<h3>داده‌ها و مدل‌های برازش‌شده</h3>
+<p>داده‌های <span class="en">UCI Adult</span> برحسب جنسیت (زن/مرد)، نژاد (پنج دسته)، و تحصیلاتِ بازکدگذاری‌شده (دبیرستان، کالج، تحصیلات پیشرفته) طبقه‌بندی شدند. خروجی گیت‌هاب جدول کامل <span class="num">2 × 5 × 3</span> با ۳۰ فراوانی و مجموع <span class="num">32,561</span> را در اختیار می‌گذارد. بازسازی این جدول همه اطلاعات لازم برای برازش مدل‌های لگ‌خطی سلسله‌مراتبی را حفظ می‌کند؛ ولی به معنی دسترسی مستقیم به رکوردهای فردی فایل CSV نیست.</p>
+<p>سه مدل لگ‌خطی پواسونِ تودرتو مقایسه شدند: استقلال متقابل <span class="en">[S][R][E]</span>، استقلال شرطی <span class="en">[SE][RE]</span> (جنسیت مستقل از نژاد به شرط تحصیلات)، و مدل دارای همه ارتباطات دوتایی <span class="en">[SR][SE][RE]</span>. آزمون‌های کای‌دوی نسبت درست‌نمایی با اختلاف انحراف مدل‌ها و درجات آزادی آن‌ها انجام شدند.</p>
+<div class="tablewrap"><table><tr><th>مدل</th><th>انحراف</th><th>درجه آزادی باقیمانده</th><th>مقدار <span class="en">p</span> برازش</th></tr>
+<tr><td>استقلال متقابل</td><td><span class="num">1104.683</span></td><td><span class="num">22</span></td><td><span class="num">9.8 × 10⁻²²⁰</span></td></tr>
+<tr><td>استقلال شرطی</td><td><span class="num">436.612</span></td><td><span class="num">12</span></td><td><span class="num">6.56 × 10⁻⁸⁶</span></td></tr>
+<tr><td>تمام ارتباطات دوتایی</td><td><span class="num">19.297</span></td><td><span class="num">8</span></td><td><span class="num">0.0133</span></td></tr></table></div>
+<div class="tablewrap"><table><tr><th>مقایسه مدل‌های تودرتو</th><th>کای‌دو نسبت درست‌نمایی</th><th>درجه آزادی</th><th>مقدار <span class="en">p</span></th></tr>
+<tr><td>استقلال متقابل ← استقلال شرطی</td><td><span class="num">668.071</span></td><td><span class="num">10</span></td><td><span class="num">4.5 × 10⁻¹³⁷</span></td></tr>
+<tr><td>استقلال شرطی ← همه ارتباطات دوتایی</td><td><span class="num">417.315</span></td><td><span class="num">4</span></td><td><span class="num">5 × 10⁻⁸⁹</span></td></tr>
+</table></div>
+<p>مدل دارای تمام ارتباطات دوتایی نسبت به استقلال شرطی بسیار بهتر است: <span class="num">χ²(4)=417.315</span> و <span class="num">p≈5.04×10⁻⁸⁹</span>. بااین‌حال، انحراف آن <span class="num">19.297</span> با ۸ درجه آزادی و <span class="num">p=0.01335</span> است؛ بنابراین آزمون برازش کلی در سطح ۵٪ رد می‌شود و وجود برهم‌کنش سه‌طرفه مطرح است. هیچ‌کدام از سه مدل غیر‌اشباعِ تعیین‌شده، معیار سختگیرانه برازش در سطح پنج درصد را برآورده نمی‌کنند؛ مدل تمام ارتباطات دوتایی فقط نسبت به دو مدل دیگر بهتر است. مدل اشباع <span class="en">[SRE]</span> جدول را دقیق بازسازی می‌کند، ولی درجه آزادی باقیمانده‌ای برای سنجش برازش ندارد.</p>
+<h3>هم‌ارزی رسمی با رگرسیون لجستیک دودویی</h3>
+<p>اگر «مرد» با عدد ۱ کدگذاری شود، رگرسیون لجستیک جنسیت برحسب اثرات اصلی نژاد و تحصیلات، از لحاظ ریاضی با مدل لگ‌خطیِ شامل <span class="en">[SR]</span>، <span class="en">[SE]</span> و <span class="en">[RE]</span> معادل است. مؤلفه <span class="en">[RE]</span> توزیع حاشیه‌ای نژاد–تحصیلات را آزاد می‌گذارد، و مؤلفه‌های <span class="en">[SR]</span> و <span class="en">[SE]</span> جمع‌پذیری اثرات در لگاریتم نسبت شانس جنسیت را به وجود می‌آورند.</p>
+<div class="tablewrap"><table class="smalltable"><tr><th>ضریب</th><th>لجستیک دودویی، ضریب (SE)</th><th>پواسون لگ‌خطی، ضریب (SE)</th></tr>
+<tr><td><span class="en">Intercept</span></td><td><span class="num">+0.6642 (0.120)</span></td><td><span class="num">+0.6642 (0.120)</span></td></tr>
+<tr><td><span class="en">Race: Asian-Pac-Islander</span></td><td><span class="num">+0.1651 (0.135)</span></td><td><span class="num">+0.1651 (0.135)</span></td></tr>
+<tr><td><span class="en">Race: Black</span></td><td><span class="num">-0.4854 (0.122)</span></td><td><span class="num">-0.4854 (0.122)</span></td></tr>
+<tr><td><span class="en">Race: Other</span></td><td><span class="num">-0.1194 (0.171)</span></td><td><span class="num">-0.1194 (0.171)</span></td></tr>
+<tr><td><span class="en">Race: White</span></td><td><span class="num">+0.2941 (0.118)</span></td><td><span class="num">+0.2941 (0.118)</span></td></tr>
+<tr><td><span class="en">Education: College</span></td><td><span class="num">-0.3892 (0.032)</span></td><td><span class="num">-0.3892 (0.032)</span></td></tr>
+<tr><td><span class="en">Education: HighSchool</span></td><td><span class="num">-0.0906 (0.031)</span></td><td><span class="num">-0.0906 (0.031)</span></td></tr>
+</table></div>
+<p>بیشترین اختلاف قدر مطلق برآوردهای هفت ضریب تقریباً <span class="num">1.3 × 10⁻¹⁴</span> بوده است؛ یعنی اختلافی در حد گردکردن محاسبات ممیز شناور. خطاهای استاندارد هم تا دقت نمایش‌داده‌شده یکسان‌اند. این نتیجه هم‌ارزی جبری مدل‌ها را روی جدول بازسازی‌شده تأیید می‌کند؛ بااین‌حال، محدودیت برازش کلی مدل ارتباطات دوتایی پابرجاست.</p>
+<p>مثال تفسیر: با ثابت‌بودن تحصیلات، ضریب لگاریتم نسبت شانس «مرد بودن» برای گروه <span class="en">Black</span> نسبت به دسته مرجع <span class="en">Amer-Indian-Eskimo</span> برابر <span class="num">-0.4854</span> (نسبت شانس تقریبی <span class="num">0.616</span>) است. این مقدار فقط ترکیب نسبی جنسیت در نمونه را توصیف می‌کند و تبیین رفتار فردی یا علت نیست.</p>
+
+<h2>تمرین ۳ — ساعات غیبت، بیش‌پراکندگی و صفرهای ساختاری</h2>
+<h3>بررسی توصیفی و مدل‌های نامزد</h3>
+<p>داده‌های غیبت از کار (<span class="num">N=740</span>) بررسی شد. متغیر پاسخ، تعداد ساعات غیبت است که مانند داده شمارشی مدل شده است. آمار تأییدشده: میانگین <span class="num">6.9243</span>، واریانس نمونه <span class="num">177.7155</span> و تعداد صفرهای مشاهده‌شده <span class="num">44</span> (معادل <span class="num">5.95%</span>). نسبت واریانس به میانگین حدود <span class="num">25.67</span> و نسبت کای‌دوی پیرسون به درجه آزادی باقیمانده در مدل پواسون <span class="num">22.127</span> است که بیش‌پراکندگی بسیار شدید را نشان می‌دهد. مدل پواسونِ برازش‌شده فقط <span class="num">1.754</span> صفر پیش‌بینی می‌کند. متغیرهای توضیحی عبارت‌اند از فاصله منزل تا محل کار، سن، سابقه خدمت و تحصیلات. کد «علت غیبت» کنار گذاشته شده، چون ممکن است وضعیت غیبت را خود افشا کند و موجب نشت اطلاعات شود.</p>
+<p>چهار مدل برازش شد: پواسون، دوجمله‌ای منفی نوع دوم (<span class="en">NB2</span>) با پارامتر پراکندگی برآورد‌شده، پواسون با صفر اضافی (<span class="en">ZIP</span>) و دوجمله‌ای منفی با صفر اضافی (<span class="en">ZINB2</span>). در دو مدل صفر‌افزا، برای جزء «صفر ساختاری» فقط عرض از مبدأ در نظر گرفته شد تا تعداد پارامترها بی‌دلیل زیاد نشود. هر چهار مدل همگرا شدند و درست‌نمایی متناهی داشتند. ستون‌های بازیابی‌شده همچنین معیار <span class="en">AIC</span> پواسون و <span class="en">NB2</span> را، تا حد گردکردن، مشابه خروجی آرشیوی بازتولید کردند.</p>
+<div class="tablewrap"><table><tr><th>مدل همگرا</th><th><span class="en">AIC</span></th><th><span class="en">BIC</span></th><th>تعداد صفر پیش‌بینی‌شده</th></tr>
+<tr><td><span class="en">NB2</span></td><td><span class="num">4,423.985</span></td><td><span class="num">4,451.625</span></td><td><span class="num">106.008</span></td></tr>
+<tr><td><span class="en">ZINB2</span></td><td><span class="num">4,425.985</span></td><td><span class="num">4,458.232</span></td><td><span class="num">106.008</span></td></tr>
+<tr><td><span class="en">ZIP</span></td><td><span class="num">9,755.493</span></td><td><span class="num">9,783.133</span></td><td><span class="num">44.765</span></td></tr>
+<tr><td>پواسون</td><td><span class="num">10,133.249</span></td><td><span class="num">10,156.282</span></td><td><span class="num">1.754</span></td></tr>
+</table></div>
+<h3>انتخاب مدل و تعبیر ضرایب</h3>
+<p><span class="en">NB2</span> کمترین <span class="en">AIC</span> و <span class="en">BIC</span> را میان چهار مدل همگرا دارد و انتخاب نهایی است. مدل <span class="en">ZINB2</span> در مقایسه با <span class="en">NB2</span> تقریباً هیچ بهبودی در درست‌نمایی ایجاد نمی‌کند؛ اما یک پارامتر اضافه دارد و به همین دلیل <span class="en">AIC</span> آن تقریباً دقیقاً دو واحد بالاتر است. نسبت شانس مؤلفه صفر ساختاری در <span class="en">ZINB2</span> حدود <span class="num">1.26 × 10⁻⁸</span> است؛ یعنی احتمال صفر اضافیِ جداگانه در عمل به صفر نزدیک می‌شود. مدل <span class="en">ZIP</span> تعداد صفرهای مشاهده‌شده را نزدیک‌تر پیش‌بینی می‌کند (<span class="num">44.77</span> در برابر <span class="num">44</span>)، اما برازش آن برای کل توزیع بسیار ضعیف‌تر است (<span class="num">AIC≈9755.49</span>). از طرف دیگر، <span class="en">NB2</span> شمار صفرها را بیش‌ازحد پیش‌بینی می‌کند (<span class="num">106.01</span> در برابر <span class="num">44</span>)؛ این یک محدودیت برازش است که باید پذیرفته شود. صرف دیدن صفرهای زیاد، وجود فرایند صفر ساختاری را ثابت نمی‌کند.</p>
+<p>در <strong>جزء شمارشی</strong>، عبارت <span class="en">exp(β)</span> ضریب ضربیِ نرخ مورد انتظار فرایند شمارشیِ نهفته را در ازای افزایش یک واحد متغیر توضیحی (با ثابت‌بودن سایر متغیرها) بیان می‌کند. در <strong>جزء صفر‌افزا</strong>، عبارت <span class="en">exp(γ)</span> نسبت شانس قرارگرفتن در گروه نهفته‌ای را نشان می‌دهد که به‌طور ساختاری همیشه صفر دارد. در <span class="en">ZIP/ZINB</span> صفر می‌تواند از هر یک از این دو جزء تولید شود. وقتی جزء صفر‌افزا فقط عرض از مبدأ دارد، مدل تنها یک احتمال مبنای صفر ساختاری را برآورد می‌کند و اثر متغیرها بر عضویت در این گروه را به دست نمی‌دهد.</p>
+<p><strong>نتیجه نهایی:</strong> مدل دوجمله‌ای منفی در مقایسه با چهار مدل همگرا، بر اساس <span class="en">AIC</span> و <span class="en">BIC</span> برتر است. در <span class="en">ZIP</span> نسبت شانسِ جزء صفر‌افزا برابر <span class="num">0.06235</span> است (احتمال صفر ساختاری تقریباً <span class="num">5.87%</span>) و نسبت نرخِ فاصله در جزء شمارشیِ آن تقریباً <span class="num">0.9870</span> است. در <span class="en">ZINB2</span> احتمال صفر اضافی عملاً ناپدید می‌شود؛ پس این داده‌ها از مکانیسم جداگانه صفر ساختاری در مدل برازش‌شده پشتیبانی نمی‌کنند. محدودیت باقی‌مانده: <span class="en">NB2</span> صفرهای بیشتری نسبت به مقدار مشاهده‌شده پیش‌بینی می‌کند.</p>
+
+<h2>محدودیت‌ها، تحویل و بازتولید</h2>
+<ul><li>فایل‌های ستون‌های استخراج‌شده و جدول فراوانی ۳۰خانه‌ای در بسته پروژه وجود دارند و هر سه تمرین را می‌توان بر اساس آن‌ها اجرا کرد؛ اجرای همان مشخصات مدل روی CSVهای اصلی گیت‌هاب نیز پشتیبانی می‌شود.</li>
+<li>آزمون‌ها و بازه‌های اطمینان، همراهی آماری را توصیف می‌کنند نه رابطه علت و معلولی را. کدگذاری عددی برخی متغیرهای ترتیبی نوعی ساده‌سازی علمی است.</li>
+<li>استاد یک PDF شامل هر سه تمرین، یک فایل کد و یادداشت درباره فردی یا گروهی‌بودن کار می‌خواهد. اگرچه ابتدای دستورالعمل عبارت «دو تمرین» دیده می‌شود، متن تمرین‌ها و فهرست تحویل صریحاً سه تمرین دارند.</li>
+<li>هر سه تمرین با ورودی‌های کافیِ بازیابی‌شده اجرا شده‌اند و نوت‌بوک شامل نتایج، وضعیت همگرایی و تشخیص‌هاست. محدودیت آن است که برای بخشی از تحلیل از استخراج ستون‌های موردنیاز استفاده شده است، نه فایل‌های CSV خام و کامل.</li></ul>
+<p class="endnote">این سند ترجمه فارسی گزارش انگلیسی نهایی پروژه است. اعداد و نتایج آماری از همان گزارش گرفته شده‌اند. توضیحات، همبستگی آماری را نشان می‌دهند و دلالت بر علیت ندارند.</p></main></body></html>

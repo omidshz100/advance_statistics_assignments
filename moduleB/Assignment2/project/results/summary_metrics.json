@@ -1,0 +1,17 @@
+{
+  "source_n": 16244,
+  "complete_n": 9623,
+  "schools": 400,
+  "classes": 757,
+  "reduced_aic": 95670.14888455768,
+  "full_aic": 94963.40255086627,
+  "lr_statistic": 786.7463336914079,
+  "lr_df": 40,
+  "lr_p": 2.4994305518799213e-139,
+  "school_variance": 66.23385075910096,
+  "class_variance": 122.45831137602568,
+  "residual_variance": 1027.2253448085746,
+  "school_icc": 0.05447232265417796,
+  "class_icc": 0.1551850031417167,
+  "converged": true
+}

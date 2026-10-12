@@ -88,7 +88,7 @@ The LunarLander observation is an eight-dimensional continuous vector, and the e
 
 A replay buffer of size **10,000** stores experiences, random mini-batches of **128** reduce immediate temporal correlations, and epsilon-greedy exploration declines from **1.00** toward **0.01** with a 15,000-step exponential constant. The agent was trained for **600 episodes**, at most **1,000 steps** per episode; γ = **0.99**, optimizer **AdamW** with learning rate **0.0005**, and Smooth L1 (Huber) loss.
 
-For nonterminal samples, the target is **y = r + γ maxₐ Q_target(s′,a)**; for genuinely ended episodes the future term is suppressed in this implementation. The policy network minimizes the difference between **Q_policy(s,a)** and this target. Gradient clipping and slow target updates stabilize optimization relative to direct, continually changing bootstrap targets.
+For nonterminal samples, the target is **y = r + γ maxₐ Q_target(s′,a)**; for transitions that the code flags as ended (either termination or time-limit truncation), the future term is suppressed. In some tasks a time-limit truncation should instead bootstrap; this is a limitation of the current implementation. The policy network minimizes the difference between **Q_policy(s,a)** and this target. Gradient clipping and slow target updates stabilize optimization relative to direct, continually changing bootstrap targets.
 
 ### T4. Observed performance
 

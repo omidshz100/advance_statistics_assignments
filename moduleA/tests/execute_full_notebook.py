@@ -9,7 +9,6 @@ from pathlib import Path
 import nbformat
 from nbclient import NotebookClient
 
-os.environ.setdefault("MPLBACKEND", "Agg")
 os.environ.setdefault("OMP_NUM_THREADS", "1")
 os.environ.setdefault("MKL_NUM_THREADS", "1")
 
@@ -30,6 +29,9 @@ def main():
             '!pip install "gymnasium[box2d]"' in cell.source):
             setup_cells[i] = cell.source
             cell.source = "# Dependencies already installed by the GitHub Actions environment."
+    # Ensure Matplotlib plots are embedded as image/png in notebook outputs.
+    # The old MPLBACKEND=Agg setting suppressed the images in executed .ipynb.
+    notebook.cells.insert(0, nbformat.v4.new_code_cell("%matplotlib inline"))
     client = NotebookClient(notebook, timeout=7200, kernel_name="python3",
         resources={"metadata": {"path": str(notebook_path.parent)}},
         allow_errors=False)
@@ -37,6 +39,7 @@ def main():
     try:
         client.execute()
     finally:
+        notebook.cells.pop(0)  # Do not permanently modify the teaching notebooks.
         for i, old_source in setup_cells.items():
             notebook.cells[i].source = old_source
     nbformat.write(notebook, notebook_path)

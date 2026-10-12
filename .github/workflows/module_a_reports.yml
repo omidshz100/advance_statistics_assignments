@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: \${{ github.event.pull_request.head.ref }}
+          ref: ${{ github.event.pull_request.head.ref }}
           persist-credentials: true
       - uses: actions/setup-python@v5
         with:
@@ -51,4 +51,4 @@ jobs:
           git add moduleA/reports
           git diff --cached --quiet && exit 0
           git commit -m "Publish four evidence-based bilingual Module A PDF reports [skip ci]"
-          git push origin HEAD:\${{ github.event.pull_request.head.ref }}
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}

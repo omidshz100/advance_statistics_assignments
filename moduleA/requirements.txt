@@ -1,0 +1,11 @@
+# Install from the repository root: pip install -r moduleA/requirements.txt
+numpy>=1.26
+gymnasium[box2d]>=1.0
+torch>=2.2
+matplotlib>=3.8
+seaborn>=0.13
+stable-baselines3>=2.3
+notebook>=7.0
+ipython>=8.0
+imageio-ffmpeg>=0.5
+moviepy>=2.0

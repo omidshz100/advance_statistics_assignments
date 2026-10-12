@@ -14,10 +14,10 @@ The lab sessions and assignments cover:
   - `SARSA` (FrozenLake) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment1/03%20LAB_A%20SARSA.ipynb)
 - **Assignment 2:**
   - `REINFORCE` (Policy Gradient) (LunarLander) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment2/04%20LAB_A%20Reinforce.ipynb)
-  - `Actor-Critic` methods (LunarLander) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment2/05%20LAB_%20A_Actor%20Critic.ipynb)
-  - `Proximal Policy Optimization (PPO)` (LunarLander) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment2/06%20LAB_A%20PPO.ipynb)
+  - `Actor-Critic` methods (CartPole-v1) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment2/05%20LAB_%20A_Actor%20Critic.ipynb)
+  - `Proximal Policy Optimization (PPO)` (CartPole-v1) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/omidshz100/advance_statistics_assignments/blob/main/moduleA/Assignment2/06%20LAB_A%20PPO.ipynb)
 
-*(Located in `moduleA/Assignment1` and `moduleA/Assignment2`)*
+*(Located in `moduleA/Assignment1` and `moduleA/Assignment2`. See [Module A reviewed notebooks and validation limits](moduleA/README_REVIEW.md).)*
 
 ### 📊 Module B: Advanced Statistical Learning
 Two completed university assignments under [Module B](moduleB/README_COMPLETED.md):

@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><title>Assignment 1 — Module A</title></head><body><main class="report"><h1>Assignment 1 — Reinforcement Learning Laboratory</h1>
+<p><strong>Advanced Statistical Learning and Modeling · Module A</strong><br />
+<strong>Student:</strong> Omid Shojaeian<br />
+<strong>Report based on:</strong> the four fully executed Assignment 1 notebooks on GitHub, 12 October 2026.<br />
+<strong>Source:</strong> official <em>Assignment 1: Reinforcement Learning Laboratory</em>, October 2025, pp. 1–4.</p>
+<h2>Abstract</h2>
+<p>This assignment implements and evaluates tabular Q-Learning and SARSA in FrozenLake-v1, a Deep Q-Network (DQN) in LunarLander-v3, and a transfer exercise applying DQN to CartPole-v1. The experiments include learning curves, a Q-value heatmap, exploration schedules, policy comparisons and independent greedy evaluations. The observed success rates and returns are reproduced from the saved outputs of the final executed notebooks; they are not invented or inferred from an example run.</p>
+<table>
+<thead>
+<tr>
+<th>Exercise</th>
+<th>Environment</th>
+<th>Final measured result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q-Learning</td>
+<td>FrozenLake-v1 (deterministic)</td>
+<td>Greedy success <strong>100.0%</strong> over 500 evaluation episodes</td>
+</tr>
+<tr>
+<td>Q-Learning</td>
+<td>FrozenLake-v1 (slippery)</td>
+<td>Greedy success <strong>68.8%</strong> over 500 evaluation episodes</td>
+</tr>
+<tr>
+<td>SARSA</td>
+<td>FrozenLake-v1 (deterministic)</td>
+<td>Greedy success <strong>100.0%</strong> over 300 evaluation episodes</td>
+</tr>
+<tr>
+<td>DQN</td>
+<td>LunarLander-v3</td>
+<td>Greedy return <strong>242.96 ± 56.69</strong> (mean ± SD; 100 episodes)</td>
+</tr>
+<tr>
+<td>Bonus DQN</td>
+<td>CartPole-v1</td>
+<td>Greedy return <strong>143.71 ± 3.93</strong> (100 episodes); <strong>not solved</strong> by the 475 criterion</td>
+</tr>
+</tbody>
+</table>
+<h2>1. Tabular Q-Learning on FrozenLake-v1</h2>
+<h3>T1. Implementation and parameters</h3>
+<p>The environment has 16 discrete states and four actions (left, down, right, up). The agent initializes a 16 × 4 zero-valued Q-table and uses epsilon-greedy exploration: select a random action with probability epsilon and otherwise choose an action with maximal Q-value. Training was executed twice, with <strong>is_slippery=False</strong> and <strong>is_slippery=True</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Hyperparameter</th>
+<th style="text-align: right;">Implemented value</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Learning rate α</td>
+<td style="text-align: right;">0.8</td>
+<td>Size of each value update</td>
+</tr>
+<tr>
+<td>Discount factor γ</td>
+<td style="text-align: right;">0.95</td>
+<td>Relative importance of future rewards</td>
+</tr>
+<tr>
+<td>Episodes</td>
+<td style="text-align: right;">20,000</td>
+<td>Repeated interaction with the environment</td>
+</tr>
+<tr>
+<td>Maximum steps per episode</td>
+<td style="text-align: right;">100</td>
+<td>Episode length cap</td>
+</tr>
+<tr>
+<td>Initial epsilon</td>
+<td style="text-align: right;">1.00</td>
+<td>Initial exploration</td>
+</tr>
+<tr>
+<td>Minimum epsilon</td>
+<td style="text-align: right;">0.01</td>
+<td>Residual exploration</td>
+</tr>
+<tr>
+<td>Exponential decay rate</td>
+<td style="text-align: right;">0.0005</td>
+<td>Gradual transition toward exploitation</td>
+</tr>
+</tbody>
+</table>
+<h3>T2. TD target and epsilon decay</h3>
+<p>The off-policy Q-Learning rule is</p>
+<p><strong>Q(s,a) ← Q(s,a) + α [r + γ max Q(s′,a′) − Q(s,a)].</strong></p>
+<p>The bracketed quantity is the temporal-difference (TD) error. The implementation sets the future bootstrap term to zero after a terminal transition. Its exploration schedule is <strong>epsilon = 0.01 + (1 − 0.01) exp(−0.0005 × episode)</strong>, so random exploration decreases without vanishing completely.</p>
+<h3>T3–T4. Learning curves, Q-value heatmap and transition stochasticity</h3>
+<p><img alt="Q-Learning reward moving average" src="figures/q_learning_curve.png" /></p>
+<p><img alt="Maximum Q-values by FrozenLake state" src="figures/q_value_heatmap.png" /></p>
+<p><img alt="FrozenLake deterministic versus slippery reward curves" src="figures/q_environment_comparison.png" /></p>
+<p>The final held-out greedy policy succeeded in <strong>100.0%</strong> of deterministic episodes and <strong>68.8%</strong> of slippery episodes. Deterministic success does not imply equal performance when the intended action can be perturbed. The observed policy maps differ between settings:</p>
+<table>
+<thead>
+<tr>
+<th>Deterministic greedy policy</th>
+<th>Slippery greedy policy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D R D L / D H D H / R D D H / H R R G</td>
+<td>L U R U / L H L H / U D L H / H R D G</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Interpretation:</strong> The environment's stochastic transition mechanism creates unavoidable execution risk and changes which routes yield favorable expected returns. The map symbols are <strong>L</strong> (left), <strong>D</strong> (down), <strong>R</strong> (right), <strong>U</strong> (up), <strong>H</strong> (hole), <strong>G</strong> (goal). A single random training run does not establish a distribution of success across seeds.</p>
+<h2>2. On-policy SARSA versus Q-Learning</h2>
+<h3>T1–T2. Implementation and theoretical distinction</h3>
+<p>SARSA chooses a successor action using its <strong>current epsilon-greedy behavior policy</strong>, then applies</p>
+<p><strong>Q(s,a) ← Q(s,a) + α [r + γ Q(s′,a′) − Q(s,a)].</strong></p>
+<p>Thus SARSA is <strong>on-policy</strong>, while Q-Learning bootstraps from the greedy maximum and is <strong>off-policy</strong>. Both use the same declared α = 0.8, γ = 0.95, 20,000 episodes, 100-step limit and epsilon decay in a deterministic FrozenLake-v1 comparison. Terminal transitions do not bootstrap in either implementation.</p>
+<h3>T3. Observed learning and evaluation comparison</h3>
+<p><img alt="SARSA and Q-Learning reward curves" src="figures/sarsa_qlearning_comparison.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Performance measure</th>
+<th style="text-align: right;">SARSA</th>
+<th style="text-align: right;">Q-Learning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Average training reward, last 500 episodes</td>
+<td style="text-align: right;">0.990</td>
+<td style="text-align: right;">0.980</td>
+</tr>
+<tr>
+<td>Independent greedy success, 300 episodes</td>
+<td style="text-align: right;">100.0%</td>
+<td style="text-align: right;">100.0%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Interpretation:</strong> Both greedy policies succeeded on all 300 held-out deterministic episodes in the recorded run. SARSA had a slightly higher last-500 training reward; this small observed difference does not establish a general algorithmic winner. In slippery environments, on-policy accounting for exploratory actions can alter risk-taking, but that proposition is not a measured result of this specific deterministic SARSA comparison.</p>
+<h2>3. Deep Q-Network on LunarLander-v3</h2>
+<h3>T1. Network architecture and target network</h3>
+<p>The LunarLander observation is an eight-dimensional continuous vector, and the environment offers four discrete actions. The Q-network is an MLP with <strong>8 → 128 (ReLU) → 128 (ReLU) → 4</strong> units. It outputs four action-value estimates rather than action probabilities. A separate target network starts as a copy of the policy network and is updated by Polyak averaging with <strong>τ = 0.005</strong>.</p>
+<h3>T2–T3. Training mechanics and Bellman target</h3>
+<p>A replay buffer of size <strong>10,000</strong> stores experiences, random mini-batches of <strong>128</strong> reduce immediate temporal correlations, and epsilon-greedy exploration declines from <strong>1.00</strong> toward <strong>0.01</strong> with a 15,000-step exponential constant. The agent was trained for <strong>600 episodes</strong>, at most <strong>1,000 steps</strong> per episode; γ = <strong>0.99</strong>, optimizer <strong>AdamW</strong> with learning rate <strong>0.0005</strong>, and Smooth L1 (Huber) loss.</p>
+<p>For nonterminal samples, the target is <strong>y = r + γ maxₐ Q_target(s′,a)</strong>; for genuinely ended episodes the future term is suppressed in this implementation. The policy network minimizes the difference between <strong>Q_policy(s,a)</strong> and this target. Gradient clipping and slow target updates stabilize optimization relative to direct, continually changing bootstrap targets.</p>
+<h3>T4. Observed performance</h3>
+<p><img alt="LunarLander DQN reward learning curve" src="figures/dqn_learning_curve.png" /></p>
+<p>A greedy evaluation on <strong>100 episodes</strong> produced an observed mean return of <strong>242.96</strong> with SD <strong>56.69</strong>. The episode-reward trajectory includes fluctuations: a positive final evaluation mean does not mean that every landing succeeded or that the policy is consistently optimal. <strong>LunarLander-v3 is the environment actually used</strong> by this notebook (the official instructions give CartPole-v1 as an illustrative control environment, not an exclusive requirement).</p>
+<h2>4. Bonus: transfer DQN to CartPole-v1</h2>
+<h3>T1–T2. Choice and adaptation</h3>
+<p>CartPole-v1 has a <strong>four-dimensional continuous observation</strong> (position, velocity, pole angle and angular velocity) and <strong>two discrete actions</strong>. The DQN was adapted to <strong>4 → 128 → 128 → 2</strong>, with γ = <strong>0.99</strong>, replay buffer 10,000, batch 128, AdamW learning rate <strong>0.0001</strong>, 500 training episodes and epsilon decay from <strong>0.90</strong> to <strong>0.05</strong> with 1,000-step scale. The CartPole task rewards each balanced time step, at most 500 per episode.</p>
+<h3>T3. Actual result and success criterion</h3>
+<p><img alt="CartPole bonus DQN episode rewards and moving average" src="figures/bonus_cartpole_curve.png" /></p>
+<p>The final greedy policy obtained <strong>143.71 ± 3.93</strong> across <strong>100 separate evaluation episodes</strong>. This is <strong>below 475</strong>, so the 475/100 convention <strong>was not met</strong> in the recorded final run, despite some higher rewards during training. The report does not replace this negative outcome with earlier runs that appeared stronger. Additional seeds, exploration tuning or training may improve the result, but those possibilities were not demonstrated by this experiment.</p>
+<h2>5. Overall discussion and limitations</h2>
+<p>Q-Learning and SARSA both achieved reliable deterministic FrozenLake navigation in the recorded greedy evaluations. The slippery FrozenLake result exposed the effect of stochastic transitions; neural approximators let the DQN methods handle continuous state vectors, at the cost of optimizer, replay and target-network sensitivities. In LunarLander, positive mean return reflects learned behavior, although evaluation variance remains nonzero. The bonus transfer ran correctly but <strong>did not solve CartPole under the stated criterion</strong>.</p>
+<p>The results are <strong>specific to the saved executions</strong>, not a statistically powered multi-seed benchmark. Greedy evaluation and training rewards have different meanings. No significance test or claim of causal superiority between algorithms is justified. The official Assignment 1 delivery requirement is the annotated executed <strong>.ipynb</strong> notebooks; this PDF is a supplementary academic narrative, not a substitute.</p>
+<h2>Reproducibility and sources</h2>
+<ul>
+<li>Official <em>ASSIGNMENT 1 — Reinforcement Learning Laboratory</em> (October 2025), pp. 1–4.</li>
+<li>Executed notebooks: `moduleA/Assignment1/01 LAB_A Q_Learning.ipynb`, `02 LAB_A DQN.ipynb`, `03 LAB_A SARSA.ipynb`, `04 LAB_A Bonus.ipynb` on the repository's main branch.</li>
+<li>All plotted figures in this report were extracted <strong>directly from the embedded image/png outputs</strong> of the above notebooks; no curves were generated from assumed values.</li>
+</ul></main></body></html>

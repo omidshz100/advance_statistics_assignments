@@ -1,0 +1,23 @@
+name: Module A short runtime smoke
+on:
+  pull_request:
+    paths:
+      - 'moduleA/**'
+      - '.github/workflows/module_a_runtime.yml'
+  workflow_dispatch:
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install reinforcement-learning runtime
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install swig
+          python -m pip install "gymnasium[box2d]>=1.0" "stable-baselines3>=2.3" "torch>=2.2" "matplotlib>=3.8" "numpy>=1.26" "seaborn>=0.13" "imageio-ffmpeg>=0.5" "moviepy>=2.0" "ipython>=8.0"
+      - name: Smoke-test short training runs for all 7 notebooks
+        run: python moduleA/tests/run_short_training.py

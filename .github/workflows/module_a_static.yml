@@ -1,0 +1,19 @@
+name: Module A notebook syntax
+on:
+  pull_request:
+    paths:
+      - 'moduleA/**'
+      - '.github/workflows/module_a_static.yml'
+  push:
+    paths:
+      - 'moduleA/**'
+      - '.github/workflows/module_a_static.yml'
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s moduleA/tests -p 'test_*.py'

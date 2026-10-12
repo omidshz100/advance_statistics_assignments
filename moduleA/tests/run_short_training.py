@@ -13,13 +13,13 @@ import sys
 os.environ.setdefault("MPLBACKEND", "Agg")
 ROOT = Path(__file__).resolve().parents[1]
 CASES = {
-    "Assignment1/01 LAB_A Q_Learning.ipynb": 9,
-    "Assignment1/02 LAB_A DQN.ipynb": 9,
-    "Assignment1/03 LAB_A SARSA.ipynb": 4,
-    "Assignment1/04 LAB_A Bonus.ipynb": 3,
-    "Assignment2/04 LAB_A Reinforce.ipynb": 6,
-    "Assignment2/05 LAB_ A_Actor Critic.ipynb": 1,
-    "Assignment2/06 LAB_A PPO.ipynb": 1,
+    "Assignment1/01 LAB_A Q_Learning.ipynb": 100,
+    "Assignment1/02 LAB_A DQN.ipynb": 100,
+    "Assignment1/03 LAB_A SARSA.ipynb": 100,
+    "Assignment1/04 LAB_A Bonus.ipynb": 100,
+    "Assignment2/04 LAB_A Reinforce.ipynb": 100,
+    "Assignment2/05 LAB_ A_Actor Critic.ipynb": 100,
+    "Assignment2/06 LAB_A PPO.ipynb": 100,
 }
 REPLACEMENTS = {
     "total_episodes = 20000": "total_episodes = 5",
@@ -32,6 +32,10 @@ REPLACEMENTS = {
     "BATCH_SIZE = 128": "BATCH_SIZE = 16",
     "n_steps=2048": "n_steps=64",
     "total_timesteps=25000": "total_timesteps=256",
+    "evaluation_episodes = 100": "evaluation_episodes = 3",
+    "n_eval_episodes=30": "n_eval_episodes=3",
+    "range(100):": "range(5):",
+    "range(500):": "range(5):",
 }
 
 

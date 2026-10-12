@@ -44,6 +44,19 @@ jobs:
           assert len(list((folder/"figures").glob("*.png")))==11
           print("Verified four PDFs and eleven genuine source figures.")
           PY
+      - name: Render PDF page previews for visual QA
+        run: |
+          pdftoppm -f 1 -l 1 -singlefile -scale-to 700 -png moduleA/reports/Assignment1_Report_EN.pdf /tmp/preview_en >/dev/null 2>&1
+          pdftoppm -f 1 -l 1 -singlefile -scale-to 700 -png moduleA/reports/Assignment1_Report_FA.pdf /tmp/preview_fa >/dev/null 2>&1
+          python - <<'PY'
+          import base64, io
+          from PIL import Image
+          for lang in ("en", "fa"):
+              im=Image.open(f"/tmp/preview_{lang}.png").convert("RGB")
+              b=io.BytesIO()
+              im.save(b,format="JPEG",quality=57,optimize=True)
+              print(f"REPORT_PREVIEW_{lang.upper()}="+base64.b64encode(b.getvalue()).decode("ascii"))
+          PY
       - name: Push PDFs, HTML reports, figures and measured values to review branch
         run: |
           git config user.name "github-actions[bot]"
